@@ -9,6 +9,25 @@ public class Poll extends HttpServlet {
 
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp){
+        BufferedReader bufferedReader = null;
+        try {
+            bufferedReader= new BufferedReader(new FileReader("poll.html"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String s;
+
+        try {
+            PrintWriter printWriter = resp.getWriter();
+            printWriter.println("get 실행");
+            while ((s =bufferedReader.readLine())!=null){
+                printWriter.println(s);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -24,7 +43,8 @@ public class Poll extends HttpServlet {
 
         try {
             PrintWriter printWriter = resp.getWriter();
-            if ((s =bufferedReader.readLine())!=null){
+            printWriter.println("post 실행");
+            while ((s =bufferedReader.readLine())!=null){
                 printWriter.println(s);
             }
         } catch (IOException e) {
