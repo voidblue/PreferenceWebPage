@@ -10,6 +10,7 @@ public class Poll extends HttpServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp){
         BufferedReader bufferedReader = null;
+        PrintWriter printWriter = null;
         try {
             bufferedReader= new BufferedReader(new FileReader("poll.html"));
         } catch (FileNotFoundException e) {
@@ -18,7 +19,7 @@ public class Poll extends HttpServlet {
         String s;
 
         try {
-            PrintWriter printWriter = resp.getWriter();
+            printWriter = resp.getWriter();
             printWriter.println("get 실행");
             while ((s =bufferedReader.readLine())!=null){
                 printWriter.println(s);
@@ -29,10 +30,13 @@ public class Poll extends HttpServlet {
         }
 
 
+        printWriter.println(System.getProperty("user.dir"));
+
+
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp){
-        
+        PrintWriter printWriter = null;
         BufferedReader bufferedReader = null;
         try {
             bufferedReader= new BufferedReader(new FileReader("poll.html"));
@@ -42,7 +46,7 @@ public class Poll extends HttpServlet {
         String s;
 
         try {
-            PrintWriter printWriter = resp.getWriter();
+            printWriter = resp.getWriter();
             printWriter.println("post 실행");
             while ((s =bufferedReader.readLine())!=null){
                 printWriter.println(s);
@@ -50,6 +54,9 @@ public class Poll extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+        printWriter.println(System.getProperty("user.dir"));
 
     }
 }

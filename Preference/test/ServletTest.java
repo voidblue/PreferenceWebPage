@@ -6,8 +6,9 @@ public class ServletTest {
     @Test
     public void test(){
         FileReader fileReader = null;
+        String path = System.getProperty("user.dir");
         try {
-            fileReader = new FileReader("/home/voidbluelabtop/Desktop/javaprogramming/Preference/src/poll.html");
+            fileReader = new FileReader(path + "/src/poll.html");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
