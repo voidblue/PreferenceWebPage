@@ -18,15 +18,18 @@ public class Result extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp){
-//        try{
-//
-//        }catch(Exception e){System.out.println(e);}
+        Recommend recommend = Recommend.getTempExcutedIntance();
+        String[] result = recommend.getResult().split("ESC");
+        PrintWriter printWriter = null;
 
         try {
-            PrintWriter printWriter = resp.getWriter();
+            printWriter = resp.getWriter();
             printWriter.println("post");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        for (String e : result) {
+            printWriter.println(e);
         }
 
     }
