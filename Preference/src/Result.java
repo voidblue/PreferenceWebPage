@@ -8,9 +8,10 @@ import java.io.*;
 
 public class Result extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp){
+        resp.setContentType("text/html; charset=euc-kr");
         try {
             PrintWriter printWriter = resp.getWriter();
-            printWriter.println("get");
+            printWriter.println("get Method호출은 지원하지 않습니다.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -18,6 +19,7 @@ public class Result extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp){
+        resp.setContentType("text/html; charset=euc-kr");
         PrintWriter printWriter = null;
         String path = System.getProperty("user.dir");
         try {
@@ -31,8 +33,12 @@ public class Result extends HttpServlet {
 
         Recommend recommend = Recommend.getTempExcutedIntance();
         String[] result = recommend.getResult().split("ESC");
+        boolean isFirst = true;
         for (String e : result) {
-            printWriter.println(e);
+            if (!isFirst) {    //스플릿 한 것중 첫번쨰 문자열은 안쓰는걸로
+                printWriter.println(e);
+                isFirst = false;
+            }
         }
 
     }
