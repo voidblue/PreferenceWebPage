@@ -24,8 +24,8 @@ public class Result extends HttpServlet {
         String path = System.getProperty("user.dir");
         try {
             printWriter = resp.getWriter();
-            printWriter.println("post");
-            printWriter.println(path);
+            printWriter.println("post<br>");
+            printWriter.println(path+ "<br>");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -36,7 +36,7 @@ public class Result extends HttpServlet {
         boolean isFirst = true;
         for (String e : result) {
             if (!isFirst) {    //스플릿 한 것중 첫번쨰 문자열은 안쓰는걸로
-                printWriter.println(e);
+                printWriter.println(e + "<br>");
             }
             isFirst = false;
         }
