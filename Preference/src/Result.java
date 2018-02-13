@@ -37,8 +37,8 @@ public class Result extends HttpServlet {
         for (String e : result) {
             if (!isFirst) {    //스플릿 한 것중 첫번쨰 문자열은 안쓰는걸로
                 printWriter.println(e);
-                isFirst = false;
             }
+            isFirst = false;
         }
 
     }
