@@ -9,8 +9,11 @@ public class Poll extends HttpServlet {
 
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp){
+
+        resp.setContentType("text/html; charset=euc-kr");
         BufferedReader bufferedReader = null;
         PrintWriter printWriter = null;
+
         String path = System.getProperty("user.dir");
         path += "/webapps/ROOT/WEB-INF/classes";
         try {
@@ -22,8 +25,8 @@ public class Poll extends HttpServlet {
 
         try {
             printWriter = resp.getWriter();
-            printWriter.println("get 실행");
-            printWriter.println(path);
+//            printWriter.println("get 실행");
+//            printWriter.println(path);
             while ((s =bufferedReader.readLine())!=null){
                 printWriter.println(s);
             }
