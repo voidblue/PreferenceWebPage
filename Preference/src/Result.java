@@ -18,19 +18,22 @@ public class Result extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp){
-        Recommend recommend = Recommend.getTempExcutedIntance();
-        String[] result = recommend.getResult().split("ESC");
         PrintWriter printWriter = null;
-
+        String path = System.getProperty("user.dir");
         try {
             printWriter = resp.getWriter();
             printWriter.println("post");
+            printWriter.println(path);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (String e : result) {
-            printWriter.println(e);
-        }
+
+
+//        Recommend recommend = Recommend.getTempExcutedIntance();
+//        String[] result = recommend.getResult().split("ESC");
+//        for (String e : result) {
+//            printWriter.println(e);
+//        }
 
     }
 }
