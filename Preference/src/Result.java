@@ -29,11 +29,11 @@ public class Result extends HttpServlet {
         }
 
 
-//        Recommend recommend = Recommend.getTempExcutedIntance();
-//        String[] result = recommend.getResult().split("ESC");
-//        for (String e : result) {
-//            printWriter.println(e);
-//        }
+        Recommend recommend = Recommend.getTempExcutedIntance();
+        String[] result = recommend.getResult().split("ESC");
+        for (String e : result) {
+            printWriter.println(e);
+        }
 
     }
 }
