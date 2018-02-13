@@ -21,6 +21,7 @@ public class Poll extends HttpServlet {
         try {
             printWriter = resp.getWriter();
             printWriter.println("get 실행");
+            printWriter.println(System.getProperty("user.dir"));
             while ((s =bufferedReader.readLine())!=null){
                 printWriter.println(s);
             }
@@ -30,7 +31,6 @@ public class Poll extends HttpServlet {
         }
 
 
-        printWriter.println(System.getProperty("user.dir"));
 
 
     }
