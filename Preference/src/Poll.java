@@ -11,8 +11,10 @@ public class Poll extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp){
         BufferedReader bufferedReader = null;
         PrintWriter printWriter = null;
+        String path = System.getProperty("user.dir");
+        path += "/webapps/ROOT/WEB-INF/classes";
         try {
-            bufferedReader= new BufferedReader(new FileReader("poll.html"));
+            bufferedReader= new BufferedReader(new FileReader(path + "/poll.html"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
