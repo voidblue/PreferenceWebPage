@@ -13,12 +13,14 @@ public class Recommend {
     public static Recommend getTempExcutedIntance(){
         String path = System.getProperty("user.dir");
         path += "/webapps/ROOT/WEB-INF/classes";
+//        path += "/out/production/Preference";
         Recommend recommend = new Recommend();
         try {
-            recommend.execute("./" +path + "/build/exe.linux-x86_64-3.5/recommend");
+            recommend.execute(path + "/build/exe.linux-x86_64-3.5/recommend");
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println(path + "/build/exe.linux-x86_64-3.5/recommend");
         return recommend;
     }
     private Recommend(){
