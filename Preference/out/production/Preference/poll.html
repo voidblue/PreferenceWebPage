@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="result" method="post">
+  <input name = "visitTime" type="number" id="visitTime" placeholder="제주 방문 횟수" onkeydown="return showKeyCode(event)"/>
+  <br>
+  <input name ="stayDuration" type="number" id="stayDuration" placeholder="체류기간" onkeydown="return showKeyCode(event)" />
+  <br>
+  <select name="주목적" id="primeReason">
+      <<option value="guide">이번 여행의 주 목적</option>
+      <<option value="1">휴가/휴양 여행</option>
+      <option value="2">축제 및 이벤트</option>
+      <option value="3">학생</option>
+      <option value="4">신혼여행</option>
+      <<option value="5">도보여행</option>
+      <option value="6">사업 또는 회의참가</option>
+      <option value="7">컨벤션/세미나 참가</option>
+      <option value="8">직장 인센티브 여행</option>
+      <option value="9">산업시찰여행</option>
+      <option value="10">친구/ 친지 방문</option>
+      <option value="11">종교 및 순례</option>
+      <option value="12">건강 및 치료</option>
+      <option value="13">교육여행</option>
+  </select>
+  <br>
+  <select name="고려요인1" id = "considerReason1" >
+      <option value="guide">고려요인1</option>
+      <option value="1">자연경관 감상</option>
+      <option value="2">휴가/휴양 여행</option>
+      <option value="3">역사/문화체험</option>
+      <option value="4">음식/ 미식탐방</option>
+      <option value="5">쇼핑</option>
+      <option value="6">기후/ 사계절</option>
+      <option value="7">여행비용</option>
+      <option value="8">가까운 거리</option>
+      <option value="9">안전, 치안</option>
+      <option value="10">한류 광광지 방문</option>
+      <option value="11">테마파크</option>
+  </select>
+  <select name="고려요인2" id = "considerReason2">
+      <option value="guide">고려요인2</option>
+      <option value="1">자연경관 감상</option>
+      <option value="2">휴가/휴양 여행</option>
+      <option value="3">역사/문화체험</option>
+      <option value="4">음식/ 미식탐방</option>
+      <option value="5">쇼핑</option>
+      <option value="6">기후/ 사계절</option>
+      <option value="7">여행비용</option>
+      <option value="8">가까운 거리</option>
+      <option value="9">안전, 치안</option>
+      <option value="10">한류 광광지 방문</option>
+      <option value="11">테마파크</option>
+  </select>
+  <br>
+  <select name="정보습득방법" id = "infoGet">
+      <<option value="guide">정보습득방법</option>
+      <option value="1">여행사</option>
+      <option value="2">친지, 친구, 동료</option>
+      <option value="3">인터넷 정보검색</option>
+      <option value="4">관광안내책자</option>
+      <option value="5">신문, 잡지, 전문서적</option>
+      <option value="6">TV, 라디오</option>
+      <option value="7">여행비용</option>
+      <option value="8">과거 여행 경험</option>
+      <option value="9">도내 기관(도청, 관광공사 등)</option>
+  </select>
+  <br>
+  <select name="동료" id = "companion">
+      <option value="guide">여행 동반자 유형</option>
+      <option value="1">혼자왔음</option>
+      <option value="2">부부, 연인</option>
+      <option value="3">가족, 친척</option>
+      <option value="4">직장동료</option>
+      <option value="5">친구</option>
+      <option value="6">친목</option>
+  </select>
+  <input name="numOfCompanion" type="number" id="numOfCompanion" placeholder="동반자 수" onkeydown="return showKeyCode(event)" />
+  <br>
+  <select name="숙박" id = "accomodation">
+      <option value="guide">숙박유형</option>
+      <option value="1">호텔</option>
+      <option value="2">모텔/호스텔</option>
+      <option value="3">게스트하우스</option>
+      <option value="4">펜션</option>
+      <option value="5">콘도/리조트</option>
+      <option value="6">숙박하지않음</option>
+  </select>
+  <br>
+  <select name="교통수단" id = "transportation">
+      <option value="1">주 교통수단</option>
+      <option value="2">렌터카</option>
+      <option value="3">대절택시/가이드동반차량</option>
+      <option value="4">대충교통: 버스/택시</option>
+      <option value="5">전세버스</option>
+      <option value="6">시티투어버스</option>
+      <option value="7">자전거/오토바이</option>
+  </select>
+  <br>
+  <select name="여행종류" id = "tripType">
+      <option value="guide">여행종류</option>
+      <option value="1">개별여행</option>
+      <option value="2">패키지여행</option>
+      <option value="3">여행사를 통한 AIR-TEL</option>
+  </select>
+<input type="submit">
+</form>
+<script src="app.js">
+
+ </script>
+</body>
+</html>
