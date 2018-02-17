@@ -24,18 +24,28 @@ public class Result extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp){
         resp.setContentType("text/html; charset=euc-kr");
         PrintWriter printWriter = null;
-        String path = System.getProperty("user.dir");
 
         String input = this.getInputText(req);
-        
+        input = "# \n" + input;
+
+
+        String path = System.getProperty("user.dir");
+        path += "/webapps/ROOT/WEB-INF/classes";
+        path += "/build";
+
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(path + "/input");
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
+            bufferedOutputStream.write(path.getBytes());
+            bufferedOutputStream.close();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
+
 
 
         try {
             printWriter = resp.getWriter();
-            printWriter.println("post<br>");
-            printWriter.println(path+ "<br>");
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -64,10 +74,17 @@ public class Result extends HttpServlet {
         String typeOftrip = req.getParameter("여행종류");
         String howGetInfo = req.getParameter("정보습득방법");
         String mainDestination = req.getParameter("주목적");
-        String residence = req.getParameter("큐텔에서준비해줄것");
-        String gender = req.getParameter("큐텔에서준비해줄것");
-        String education = req.getParameter("큐텔에서준비해줄것");
-        String birthYear = req.getParameter("큐텔에서준비해줄것");
+
+//        String residence = req.getParameter("큐텔에서준비해줄것");
+//        String gender = req.getParameter("큐텔에서준비해줄것");
+//        String education = req.getParameter("큐텔에서준비해줄것");
+//        String birthYear = req.getParameter("큐텔에서준비해줄것");
+
+        String residence = "1";
+        String gender = "1";
+        String education = "1";
+        String birthYear = "1";
+
         int currentMonth = Calendar.MONTH;
 
         int iTypeOfCompanion = Integer.parseInt(typeOfCompanion.toString());

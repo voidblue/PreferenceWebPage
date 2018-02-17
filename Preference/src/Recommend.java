@@ -11,7 +11,6 @@ public class Recommend {
         return new Recommend();
     }
 
-
     public static Recommend getTempExcutedIntance(){
         String path = System.getProperty("user.dir");
         path += "/webapps/ROOT/WEB-INF/classes";
