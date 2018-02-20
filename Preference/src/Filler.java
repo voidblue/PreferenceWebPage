@@ -112,7 +112,7 @@ public class Filler {
         return "0";
     }
 
-    public String filTransportaion()
+    public String fillTransportaion()
     {
         String transportaion = req.getParameter("교통수단");
 
@@ -134,7 +134,7 @@ public class Filler {
         if (reason1.equals("guide"))
         {
             String howGetInfo = fillHowGetInfo();
-            String transportaion = filTransportaion();
+            String transportaion = fillTransportaion();
 
             if (howGetInfo.equals("과거여행경험") || howGetInfo.equals("신문/잡지/서적")
                     || howGetInfo.equals("TV/라디오")) {
@@ -176,6 +176,23 @@ public class Filler {
         }
 
         return mainDestination;
+    }
+
+    public String fillTypeOfTrip()
+    {
+        String typeOftrip = req.getParameter("여행종류");
+
+        if (typeOftrip.equals("guide")) {
+            String transportation = fillTransportaion();
+            String numOfCompanion = fillNumOfCompanion();
+
+            if (transportation.equals("전세버스")) { typeOftrip = "패키지여행"; }
+            else if (transportation.equals("대절택시") || transportation.equals("시티투어버스")) {
+                if (numOfCompanion.equals("5~9명") || numOfCompanion.equals("10명 이상")) { typeOftrip = "패키지여행"; }
+            } else { typeOftrip = "개별여행"; }
+        }
+
+        return typeOftrip;
     }
 
 }

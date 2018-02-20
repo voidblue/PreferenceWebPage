@@ -77,13 +77,13 @@ public class Result extends HttpServlet {
         String stayDuration = filler.fillStayDuration();
         String visitTime = filler.fillVisitTime();
         // TODO: 만 15세미만 동반자 여부 넣어야 함
-        String transportaion = filler.filTransportaion();
+        String transportaion = filler.fillTransportaion();
         String reason1 = filler.fillReason1();
         String reason2 = filler.fillReason2();
         String mainDestination = filler.fillMainDest();
+        String typeOftrip = filler.fillTypeOfTrip();
 
         String accomodation = req.getParameter("숙박");
-        String typeOftrip = req.getParameter("여행종류");
 
 
         int currentMonth = Calendar.MONTH;
