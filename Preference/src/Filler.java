@@ -4,9 +4,14 @@ import java.util.Calendar;
 public class Filler {
     private HttpServletRequest req;
 
-    public Filler(HttpServletRequest req)
+    private Filler(HttpServletRequest req)
     {
         this.req = req;
+    }
+
+    public static Filler getInstance(HttpServletRequest req)
+    {
+        return new Filler(req);
     }
 
     public String fillNumOfCompanion()

@@ -63,27 +63,28 @@ public class Result extends HttpServlet {
 
     }
     private String getInputText(HttpServletRequest req){
-        String numOfCompanion = req.getParameter("numOfCompanion");
-        String stayDuration = req.getParameter("stayDuration");
-        String visitTime = req.getParameter("visitTime");
-        String reason1 = req.getParameter("고려요인1");
-        String reason2 = req.getParameter("고려요인2");
-        String transportaion = req.getParameter("교통수단");
-        String typeOfCompanion = req.getParameter("동료");
-        String accomodation = req.getParameter("숙박");
-        String typeOftrip = req.getParameter("여행종류");
-        String howGetInfo = req.getParameter("정보습득방법");
-        String mainDestination = req.getParameter("주목적");
+        Filler filler = Filler.getInstance(req);
 
-//        String residence = req.getParameter("큐텔에서준비해줄것");
-//        String gender = req.getParameter("큐텔에서준비해줄것");
-//        String education = req.getParameter("큐텔에서준비해줄것");
-//        String birthYear = req.getParameter("큐텔에서준비해줄것");
-
+        // TODO: 큐텔에서 파라미터 준비해주는 대로 수정 필요
         String residence = "1";
         String gender = "1";
         String education = "1";
         String birthYear = "1";
+
+        String numOfCompanion = filler.fillNumOfCompanion();
+        String typeOfCompanion = filler.fillTypeOfCompanion();
+        String howGetInfo = filler.fillHowGetInfo();
+        String stayDuration = filler.fillStayDuration();
+        String visitTime = filler.fillVisitTime();
+        // TODO: 만 15세미만 동반자 여부 넣어야 함
+        String transportaion = filler.filTransportaion();
+        String reason1 = filler.fillReason1();
+        String reason2 = filler.fillReason2();
+        String mainDestination = filler.fillMainDest();
+
+        String accomodation = req.getParameter("숙박");
+        String typeOftrip = req.getParameter("여행종류");
+
 
         int currentMonth = Calendar.MONTH;
 
