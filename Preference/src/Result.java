@@ -64,21 +64,29 @@ public class Result extends HttpServlet {
 
     }
 
-
+    //if you want set defaulut value, fix this
+    private String getParam(HttpServletRequest req, String s){
+        if (req.getParameter("s").equals("guide")){
+            return "0";
+        } else if(req.getParameter("s") == null){
+            return "0";
+        }
+        else return req.getParameter(s);
+    }
 
     private String getInputText(HttpServletRequest req){
-        String numOfCompanion = req.getParameter("numOfCompanion");
-        String stayDuration = req.getParameter("stayDuration");
-        String visitTime = req.getParameter("visitTime");
-        String reason1 = req.getParameter("considerReason1");
-        String reason2 = req.getParameter("considerReason2");
-        String transportaion = req.getParameter("transportation");
-        String typeOfCompanion = req.getParameter("companion");
-        String accomodation = req.getParameter("accomodation");
-        String typeOftrip = req.getParameter("tripType");
-        String howGetInfo = req.getParameter("infoGet");
-        String mainDestination = req.getParameter("primeReason");
-        String job = req.getParameter("job");
+        String numOfCompanion = getParam(req,"numOfCompanion");
+        String stayDuration = getParam(req,"stayDuration");
+        String visitTime = getParam(req,"visitTime");
+        String reason1 = getParam(req,"considerReason1");
+        String reason2 = getParam(req, "considerReason2");
+        String transportation = getParam(req, "transportation");
+        String typeOfCompanion = getParam(req, "companion");
+        String accomodation = getParam(req, "accomodation");
+        String tripType = getParam(req,"tripType");
+        String howGetInfo = getParam(req,"infoGet");
+        String mainDestination = getParam(req, "primeReason");
+        String job = getParam(req, "job");
 
 //        String residence = req.getParameter("큐텔에서준비해줄것");
 //        String gender = req.getParameter("큐텔에서준비해줄것");
@@ -118,12 +126,14 @@ public class Result extends HttpServlet {
 
         String input = visitTime + " " + stayDuration + " " + mainDestination + " " + reason1 + " " +
                 reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + numOfCompanion + " "+ " 0 " +
-                codeAccomodation + " " + transportaion + " " + typeOftrip + " " + residence + " " + gender + " " + education + " " +
+                codeAccomodation + " " + transportation + " " + tripType + " " + residence + " " + gender + " " + education + " " +
                 birthYear + " "  + job + " " +  currentMonth;
         //일단 미성년자 0으로 두기
 
         return input;
     }
+
+
 
 }
 
