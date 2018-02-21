@@ -46,11 +46,7 @@ public class Result extends HttpServlet {
 
         try {
             printWriter = resp.getWriter();
-<<<<<<< HEAD
             printWriter.println(path +"/input");
-=======
-            printWriter.println(path+"/input");
->>>>>>> refs/remotes/origin/ServletInputTest
         } catch (IOException e) {
             e.printStackTrace();
         }
