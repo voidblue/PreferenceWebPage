@@ -66,14 +66,14 @@ public class Result extends HttpServlet {
         String numOfCompanion = req.getParameter("numOfCompanion");
         String stayDuration = req.getParameter("stayDuration");
         String visitTime = req.getParameter("visitTime");
-        String reason1 = req.getParameter("고려요인1");
-        String reason2 = req.getParameter("고려요인2");
-        String transportaion = req.getParameter("교통수단");
-        String typeOfCompanion = req.getParameter("동료");
-        String accomodation = req.getParameter("숙박");
-        String typeOftrip = req.getParameter("여행종류");
-        String howGetInfo = req.getParameter("정보습득방법");
-        String mainDestination = req.getParameter("주목적");
+        String reason1 = req.getParameter("considerReason1");
+        String reason2 = req.getParameter("considerReason2");
+        String transportaion = req.getParameter("transportation");
+        String typeOfCompanion = req.getParameter("companion");
+        String accomodation = req.getParameter("accomodation");
+        String typeOftrip = req.getParameter("tripType");
+        String howGetInfo = req.getParameter("infoGet");
+        String mainDestination = req.getParameter("primeReason");
 
 //        String residence = req.getParameter("큐텔에서준비해줄것");
 //        String gender = req.getParameter("큐텔에서준비해줄것");
