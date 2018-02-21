@@ -46,6 +46,7 @@ public class Result extends HttpServlet {
 
         try {
             printWriter = resp.getWriter();
+            printWriter.println(path+"/input");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,6 +63,9 @@ public class Result extends HttpServlet {
         }
 
     }
+
+
+
     private String getInputText(HttpServletRequest req){
         String numOfCompanion = req.getParameter("numOfCompanion");
         String stayDuration = req.getParameter("stayDuration");
