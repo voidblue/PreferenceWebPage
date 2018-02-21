@@ -78,6 +78,7 @@ public class Result extends HttpServlet {
         String typeOftrip = req.getParameter("tripType");
         String howGetInfo = req.getParameter("infoGet");
         String mainDestination = req.getParameter("primeReason");
+        String job = req.getParameter("job");
 
 //        String residence = req.getParameter("큐텔에서준비해줄것");
 //        String gender = req.getParameter("큐텔에서준비해줄것");
@@ -118,7 +119,7 @@ public class Result extends HttpServlet {
         String input = visitTime + " " + stayDuration + " " + mainDestination + " " + reason1 + " " +
                 reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + numOfCompanion + " "+ " 0 " +
                 codeAccomodation + " " + transportaion + " " + typeOftrip + " " + residence + " " + gender + " " + education + " " +
-                birthYear + " "  + currentMonth;
+                birthYear + " "  + job + " " +  currentMonth;
         //일단 미성년자 0으로 두기
 
         return input;
