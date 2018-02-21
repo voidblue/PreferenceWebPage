@@ -36,7 +36,7 @@ public class Result extends HttpServlet {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(path + "/input");
             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
-            bufferedOutputStream.write(path.getBytes());
+            bufferedOutputStream.write(input.getBytes());
             bufferedOutputStream.close();
         } catch (java.io.IOException e) {
             e.printStackTrace();
@@ -46,6 +46,7 @@ public class Result extends HttpServlet {
 
         try {
             printWriter = resp.getWriter();
+            printWriter.println(path +"/input");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -83,7 +84,7 @@ public class Result extends HttpServlet {
         String residence = "1";
         String gender = "1";
         String education = "1";
-        String birthYear = "1";
+        String birthYear = "1994";
 
         int currentMonth = Calendar.MONTH;
 
@@ -101,7 +102,7 @@ public class Result extends HttpServlet {
 
         int iAccomodation = Integer.parseInt(accomodation);
         StringBuilder AccomodationBuilder = new StringBuilder();
-        for (int i = 1 ;  i <= 6 ; i++){
+        for (int i = 1 ;  i <= 8 ; i++){
             if ( i == iAccomodation ){
                 AccomodationBuilder.append(i + " ");
             }
@@ -112,9 +113,9 @@ public class Result extends HttpServlet {
         String codeAccomodation = AccomodationBuilder.toString();
 
         String input = visitTime + " " + stayDuration + " " + mainDestination + " " + reason1 + " " +
-                reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + " 0 " + numOfCompanion + " " +
+                reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + numOfCompanion + " "+ " 0 " +
                 codeAccomodation + " " + transportaion + " " + typeOftrip + " " + residence + " " + gender + " " + education + " " +
-                birthYear + " " + currentMonth;
+                birthYear + " "  + currentMonth;
         //일단 미성년자 0으로 두기
 
         return input;
