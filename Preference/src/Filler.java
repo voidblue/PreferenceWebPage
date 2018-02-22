@@ -195,4 +195,29 @@ public class Filler {
         return typeOftrip;
     }
 
+    public String fillAccomodation()
+    {
+        String accomodation = req.getParameter("숙박");
+
+        if (accomodation.equals("guide"))
+        {
+            // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함
+            String transportaion = fillTransportaion();
+            String typeOfCompanion = fillTypeOfCompanion();
+            String stayDuration = fillStayDuration();
+            String age = req.getParameter("연령");
+
+            if (typeOfCompanion.equals("친구") || typeOfCompanion.equals("혼자왔음")) {
+                if (age.equals("20대") || stayDuration.equals("4~5일")) { accomodation = "게스트하우스"; }
+                else if (age.equals("10대") || age.equals("30대")) {
+                    if (transportaion.equals("대중교통") || transportaion.equals("자전거/오토바이")
+                            || transportaion.equals("시티투어버스")) {
+                        accomodation = "게스트하우스";
+                    }
+                }
+            } else { accomodation = "호텔"; }
+        }
+
+        return accomodation;
+    }
 }

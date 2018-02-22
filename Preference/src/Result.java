@@ -82,9 +82,7 @@ public class Result extends HttpServlet {
         String reason2 = filler.fillReason2();
         String mainDestination = filler.fillMainDest();
         String typeOftrip = filler.fillTypeOfTrip();
-
-        String accomodation = req.getParameter("숙박");
-
+        String accomodation = filler.fillAccomodation();
 
         int currentMonth = Calendar.MONTH;
 
