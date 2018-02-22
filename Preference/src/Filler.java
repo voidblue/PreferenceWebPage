@@ -1,5 +1,7 @@
 import javax.servlet.http.HttpServletRequest;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class Filler {
     private HttpServletRequest req;
@@ -22,6 +24,26 @@ public class Filler {
         return isEmpty;
     }
 
+    private String yearToAge(String year)
+    {
+        Calendar calendar = new GregorianCalendar(Locale.KOREA);
+
+        int birthYear = Integer.parseInt(year);
+        int currentYear = calendar.get(Calendar.YEAR);
+        int age = currentYear - birthYear + 1;
+        String result = null;
+
+        if (age >= 0 && age < 20) { result = "10대"; }
+        else if (age >= 20 && age < 30) { result = "20대"; }
+        else if (age >= 30 && age < 40) { result = "30대"; }
+        else if (age >= 40 && age < 50) { result = "40대"; }
+        else if (age >= 50 && age < 60) { result = "50대"; }
+        else if (age >= 60 && age < 70) { result = "60대"; }
+        else if (age >= 70) { result = "70대"; }
+
+        return result;
+    }
+
     public String fillJob()
     {
         String job = req.getParameter("job");
@@ -40,9 +62,10 @@ public class Filler {
 
         if (isEmpty(numOfCompanion))
         {
-            // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함 (연령, 직업)
-            String age = req.getParameter("연령");
-            String job = req.getParameter("직업");
+            // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함
+//            String age = req.getParameter("연령");
+            String age = yearToAge("1994");
+            String job = fillJob();
             if (age.equals("30대") && job.equals("주부")) { numOfCompanion = "3~4명"; }
             else if (age.equals("40대")) { numOfCompanion = "3~4명"; }
             else { numOfCompanion = "2명"; }
@@ -57,10 +80,12 @@ public class Filler {
 
         if (isEmpty(typeOfCompanion))
         {
-            // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함 (연령, 직업, 학력)
-            String age = req.getParameter("연령");
-            String education = req.getParameter("학력");
-            String job = req.getParameter("직업");
+            // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함
+//            String age = req.getParameter("연령");
+            String age = yearToAge("1994");
+//            String education = req.getParameter("학력");
+            String education = "1";
+            String job = fillJob();
 
             if (age.equals("10대") && education.equals("대학생")) { typeOfCompanion = "친구"; }
             else if (age.equals("20대")) {
@@ -81,7 +106,8 @@ public class Filler {
         if (isEmpty(howGetInfo))
         {
             // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함
-            String age = req.getParameter("연령");
+//            String age = req.getParameter("연령");
+            String age = yearToAge("1994");
 
             if (age.equals("60대") || age.equals("70대")) { howGetInfo = "친구/친지/동료"; }
             else { howGetInfo = "인터넷 정보검색"; }
@@ -112,8 +138,10 @@ public class Filler {
         if (isEmpty(visitTime))
         {
             // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함
-            String age = req.getParameter("연령");
-            String education = req.getParameter("학력");
+//            String age = req.getParameter("연령");
+//            String education = req.getParameter("학력");
+            String age = yearToAge("1994");
+            String education = "1";
             int currentMonth = Calendar.MONTH;
 
             if (age.equals("30대")) {
@@ -133,7 +161,8 @@ public class Filler {
         if (isEmpty(minorPresence))
         {
             String typeOfCompanion = fillTypeOfCompanion();
-            String age = req.getParameter("연령");
+//            String age = req.getParameter("연령");
+            String age = yearToAge("1994");
 
             if (typeOfCompanion.equals("가족/친척")) {
                 if (age.equals("30대") || age.equals("40대") || age.equals("70대")) { minorPresence = "1";}
@@ -236,7 +265,9 @@ public class Filler {
             String transportaion = fillTransportation();
             String typeOfCompanion = fillTypeOfCompanion();
             String stayDuration = fillStayDuration();
-            String age = req.getParameter("연령");
+//            String age = req.getParameter("연령");
+            String age = yearToAge("1994");
+
 
             if (typeOfCompanion.equals("친구") || typeOfCompanion.equals("혼자왔음")) {
                 if (age.equals("20대") && stayDuration.equals("4~5일")) { accomodation = "게스트하우스"; }

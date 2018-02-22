@@ -67,24 +67,6 @@ public class Result extends HttpServlet {
     private String getInputText(HttpServletRequest req){
         Filler filler = Filler.getInstance(req);
 
-//        String numOfCompanion = getParam(req,"numOfCompanion");
-//        String stayDuration = getParam(req,"stayDuration");
-//        String visitTime = getParam(req,"visitTime");
-//        String reason1 = getParam(req,"considerReason1");
-//        String reason2 = getParam(req, "considerReason2");
-//        String transportation = getParam(req, "transportation");
-//        String typeOfCompanion = getParam(req, "companion");
-//        String accomodation = getParam(req, "accomodation");
-//        String tripType = getParam(req,"tripType");
-//        String howGetInfo = getParam(req,"infoGet");
-//        String mainDestination = getParam(req, "primeReason");
-//        String job = getParam(req, "job");
-
-//        String residence = req.getParameter("큐텔에서준비해줄것");
-//        String gender = req.getParameter("큐텔에서준비해줄것");
-//        String education = req.getParameter("큐텔에서준비해줄것");
-//        String birthYear = req.getParameter("큐텔에서준비해줄것");
-
         // TODO: 큐텔에서 파라미터 준비해주는 대로 수정 필요
         String residence = "1";
         String gender = "1";
