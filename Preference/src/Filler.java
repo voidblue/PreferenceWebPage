@@ -22,6 +22,18 @@ public class Filler {
         return isEmpty;
     }
 
+    public String fillJob()
+    {
+        String job = req.getParameter("job");
+
+        if (isEmpty(job))
+        {
+            job = "전문가 및 관련종사자";
+        }
+
+        return job;
+    }
+
     public String fillNumOfCompanion()
     {
         String numOfCompanion = req.getParameter("numOfCompanion");
