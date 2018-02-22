@@ -36,7 +36,7 @@ public class Result extends HttpServlet {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(path + "/input");
             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
-            bufferedOutputStream.write(path.getBytes());
+            bufferedOutputStream.write(input.getBytes());
             bufferedOutputStream.close();
         } catch (java.io.IOException e) {
             e.printStackTrace();
@@ -46,6 +46,7 @@ public class Result extends HttpServlet {
 
         try {
             printWriter = resp.getWriter();
+            printWriter.println(path +"/input");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,26 +63,46 @@ public class Result extends HttpServlet {
         }
 
     }
+
     private String getInputText(HttpServletRequest req){
         Filler filler = Filler.getInstance(req);
+
+//        String numOfCompanion = getParam(req,"numOfCompanion");
+//        String stayDuration = getParam(req,"stayDuration");
+//        String visitTime = getParam(req,"visitTime");
+//        String reason1 = getParam(req,"considerReason1");
+//        String reason2 = getParam(req, "considerReason2");
+//        String transportation = getParam(req, "transportation");
+//        String typeOfCompanion = getParam(req, "companion");
+//        String accomodation = getParam(req, "accomodation");
+//        String tripType = getParam(req,"tripType");
+//        String howGetInfo = getParam(req,"infoGet");
+//        String mainDestination = getParam(req, "primeReason");
+//        String job = getParam(req, "job");
+
+//        String residence = req.getParameter("큐텔에서준비해줄것");
+//        String gender = req.getParameter("큐텔에서준비해줄것");
+//        String education = req.getParameter("큐텔에서준비해줄것");
+//        String birthYear = req.getParameter("큐텔에서준비해줄것");
 
         // TODO: 큐텔에서 파라미터 준비해주는 대로 수정 필요
         String residence = "1";
         String gender = "1";
         String education = "1";
-        String birthYear = "1";
+        String birthYear = "1994";
 
+        String job = filler.fillJob();
         String numOfCompanion = filler.fillNumOfCompanion();
         String typeOfCompanion = filler.fillTypeOfCompanion();
         String howGetInfo = filler.fillHowGetInfo();
         String stayDuration = filler.fillStayDuration();
         String visitTime = filler.fillVisitTime();
         String minorPresence = filler.fillMinorPresence();
-        String transportaion = filler.fillTransportaion();
+        String transportation = filler.fillTransportation();
         String reason1 = filler.fillReason1();
         String reason2 = filler.fillReason2();
         String mainDestination = filler.fillMainDest();
-        String typeOftrip = filler.fillTypeOfTrip();
+        String tripType = filler.fillTripType();
         String accomodation = filler.fillAccomodation();
 
         int currentMonth = Calendar.MONTH;
@@ -100,7 +121,7 @@ public class Result extends HttpServlet {
 
         int iAccomodation = Integer.parseInt(accomodation);
         StringBuilder AccomodationBuilder = new StringBuilder();
-        for (int i = 1 ;  i <= 6 ; i++){
+        for (int i = 1 ;  i <= 8 ; i++){
             if ( i == iAccomodation ){
                 AccomodationBuilder.append(i + " ");
             }
@@ -111,12 +132,14 @@ public class Result extends HttpServlet {
         String codeAccomodation = AccomodationBuilder.toString();
 
         String input = visitTime + " " + stayDuration + " " + mainDestination + " " + reason1 + " " +
-                reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + minorPresence + numOfCompanion + " " +
-                codeAccomodation + " " + transportaion + " " + typeOftrip + " " + residence + " " + gender + " " + education + " " +
-                birthYear + " " + currentMonth;
+                reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + numOfCompanion + " "+ minorPresence +
+                codeAccomodation + " " + transportation + " " + tripType + " " + residence + " " + gender + " " + education + " " +
+                birthYear + " "  + job + " " +  currentMonth;
 
         return input;
     }
+
+
 
 }
 

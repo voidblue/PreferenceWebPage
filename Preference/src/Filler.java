@@ -14,7 +14,13 @@ public class Filler {
         return new Filler(req);
     }
 
-    private boolean isEmpty(String str) { return str.equals("guide"); }
+    private boolean isEmpty(String str) {
+        boolean isEmpty = false;
+
+        if (str.equals("guide") || str == null) { isEmpty = true; }
+
+        return isEmpty;
+    }
 
     public String fillNumOfCompanion()
     {
@@ -125,7 +131,7 @@ public class Filler {
         return minorPresence;
     }
 
-    public String fillTransportaion()
+    public String fillTransportation()
     {
         String transportaion = req.getParameter("교통수단");
 
@@ -147,7 +153,7 @@ public class Filler {
         if (isEmpty(reason1))
         {
             String howGetInfo = fillHowGetInfo();
-            String transportaion = fillTransportaion();
+            String transportaion = fillTransportation();
 
             if (howGetInfo.equals("과거여행경험") || howGetInfo.equals("신문/잡지/서적")
                     || howGetInfo.equals("TV/라디오")) {
@@ -191,12 +197,12 @@ public class Filler {
         return mainDestination;
     }
 
-    public String fillTypeOfTrip()
+    public String fillTripType()
     {
         String typeOftrip = req.getParameter("여행종류");
 
         if (isEmpty(typeOftrip)) {
-            String transportation = fillTransportaion();
+            String transportation = fillTransportation();
             String numOfCompanion = fillNumOfCompanion();
 
             if (transportation.equals("전세버스")) { typeOftrip = "패키지여행"; }
@@ -215,7 +221,7 @@ public class Filler {
         if (isEmpty(accomodation))
         {
             // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함
-            String transportaion = fillTransportaion();
+            String transportaion = fillTransportation();
             String typeOfCompanion = fillTypeOfCompanion();
             String stayDuration = fillStayDuration();
             String age = req.getParameter("연령");
