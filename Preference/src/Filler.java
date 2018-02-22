@@ -105,11 +105,22 @@ public class Filler {
         return visitTime;
     }
 
-    public String fillMinor()
+    public String fillMinorPresence()
     {
-        // TODO
+        // TODO : 파라미터 이름 확인 및 수정 필요
+        String minorPresence = req.getParameter("만15세미만동반유무");
 
-        return "0";
+        if (minorPresence.equals("guide"))
+        {
+            String typeOfCompanion = fillTypeOfCompanion();
+            String age = req.getParameter("연령");
+
+            if (typeOfCompanion.equals("가족/친척")) {
+                if (age.equals("30대") || age.equals("40대") || age.equals("70대")) { minorPresence = "1";}
+            } else { minorPresence = "0"; }
+        }
+
+        return minorPresence;
     }
 
     public String fillTransportaion()
@@ -208,7 +219,7 @@ public class Filler {
             String age = req.getParameter("연령");
 
             if (typeOfCompanion.equals("친구") || typeOfCompanion.equals("혼자왔음")) {
-                if (age.equals("20대") || stayDuration.equals("4~5일")) { accomodation = "게스트하우스"; }
+                if (age.equals("20대") && stayDuration.equals("4~5일")) { accomodation = "게스트하우스"; }
                 else if (age.equals("10대") || age.equals("30대")) {
                     if (transportaion.equals("대중교통") || transportaion.equals("자전거/오토바이")
                             || transportaion.equals("시티투어버스")) {

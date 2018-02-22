@@ -76,7 +76,7 @@ public class Result extends HttpServlet {
         String howGetInfo = filler.fillHowGetInfo();
         String stayDuration = filler.fillStayDuration();
         String visitTime = filler.fillVisitTime();
-        // TODO: 만 15세미만 동반자 여부 넣어야 함
+        String minorPresence = filler.fillMinorPresence();
         String transportaion = filler.fillTransportaion();
         String reason1 = filler.fillReason1();
         String reason2 = filler.fillReason2();
@@ -111,10 +111,9 @@ public class Result extends HttpServlet {
         String codeAccomodation = AccomodationBuilder.toString();
 
         String input = visitTime + " " + stayDuration + " " + mainDestination + " " + reason1 + " " +
-                reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + " 0 " + numOfCompanion + " " +
+                reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + minorPresence + numOfCompanion + " " +
                 codeAccomodation + " " + transportaion + " " + typeOftrip + " " + residence + " " + gender + " " + education + " " +
                 birthYear + " " + currentMonth;
-        //일단 미성년자 0으로 두기
 
         return input;
     }
