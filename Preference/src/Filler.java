@@ -14,11 +14,13 @@ public class Filler {
         return new Filler(req);
     }
 
+    private boolean isEmpty(String str) { return str.equals("guide"); }
+
     public String fillNumOfCompanion()
     {
         String numOfCompanion = req.getParameter("numOfCompanion");
 
-        if (numOfCompanion.equals("guide"))
+        if (isEmpty(numOfCompanion))
         {
             // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함 (연령, 직업)
             String age = req.getParameter("연령");
@@ -35,7 +37,7 @@ public class Filler {
     {
         String typeOfCompanion = req.getParameter("동료");
 
-        if (typeOfCompanion.equals("guide"))
+        if (isEmpty(typeOfCompanion))
         {
             // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함 (연령, 직업, 학력)
             String age = req.getParameter("연령");
@@ -58,7 +60,7 @@ public class Filler {
     {
         String howGetInfo = req.getParameter("정보습득방법");
 
-        if (howGetInfo.equals("guide"))
+        if (isEmpty(howGetInfo))
         {
             // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함
             String age = req.getParameter("연령");
@@ -74,7 +76,7 @@ public class Filler {
     {
         String stayDuration = req.getParameter("stayDuration");
 
-        if (stayDuration.equals("guide"))
+        if (isEmpty(stayDuration))
         {
             int currentMonth = Calendar.MONTH;
 
@@ -89,7 +91,7 @@ public class Filler {
     {
         String visitTime = req.getParameter("visitTime");
 
-        if (visitTime.equals("guide"))
+        if (isEmpty(visitTime))
         {
             // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함
             String age = req.getParameter("연령");
@@ -110,7 +112,7 @@ public class Filler {
         // TODO : 파라미터 이름 확인 및 수정 필요
         String minorPresence = req.getParameter("만15세미만동반유무");
 
-        if (minorPresence.equals("guide"))
+        if (isEmpty(minorPresence))
         {
             String typeOfCompanion = fillTypeOfCompanion();
             String age = req.getParameter("연령");
@@ -127,7 +129,7 @@ public class Filler {
     {
         String transportaion = req.getParameter("교통수단");
 
-        if (transportaion.equals("guide")) {
+        if (isEmpty(transportaion)) {
             String numOfCompanion = fillNumOfCompanion();
 
             if (numOfCompanion.equals("혼자")) { transportaion = "대중교통"; }
@@ -142,7 +144,7 @@ public class Filler {
     {
         String reason1 = req.getParameter("고려요인1");
 
-        if (reason1.equals("guide"))
+        if (isEmpty(reason1))
         {
             String howGetInfo = fillHowGetInfo();
             String transportaion = fillTransportaion();
@@ -164,7 +166,7 @@ public class Filler {
     {
         String reason2 = req.getParameter("고려요인2");
 
-        if (reason2.equals("guide"))
+        if (isEmpty(reason2))
         {
             String reason1 = fillReason1();
 
@@ -181,7 +183,7 @@ public class Filler {
     {
         String mainDestination = req.getParameter("주목적");
 
-        if (mainDestination.equals("guide"))
+        if (isEmpty(mainDestination))
         {
             mainDestination = fillReason1();
         }
@@ -193,7 +195,7 @@ public class Filler {
     {
         String typeOftrip = req.getParameter("여행종류");
 
-        if (typeOftrip.equals("guide")) {
+        if (isEmpty(typeOftrip)) {
             String transportation = fillTransportaion();
             String numOfCompanion = fillNumOfCompanion();
 
@@ -210,7 +212,7 @@ public class Filler {
     {
         String accomodation = req.getParameter("숙박");
 
-        if (accomodation.equals("guide"))
+        if (isEmpty(accomodation))
         {
             // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함
             String transportaion = fillTransportaion();
