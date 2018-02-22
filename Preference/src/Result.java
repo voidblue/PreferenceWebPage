@@ -36,7 +36,7 @@ public class Result extends HttpServlet {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(path + "/input");
             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
-            bufferedOutputStream.write(path.getBytes());
+            bufferedOutputStream.write(input.getBytes());
             bufferedOutputStream.close();
         } catch (java.io.IOException e) {
             e.printStackTrace();
@@ -46,6 +46,7 @@ public class Result extends HttpServlet {
 
         try {
             printWriter = resp.getWriter();
+            printWriter.println(path +"/input");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,18 +63,30 @@ public class Result extends HttpServlet {
         }
 
     }
+
+    //if you want set defaulut value, fix this
+    private String getParam(HttpServletRequest req, String s){
+        if (req.getParameter("s").equals("guide")){
+            return "0";
+        } else if(req.getParameter("s") == null){
+            return "0";
+        }
+        else return req.getParameter(s);
+    }
+
     private String getInputText(HttpServletRequest req){
-        String numOfCompanion = req.getParameter("numOfCompanion");
-        String stayDuration = req.getParameter("stayDuration");
-        String visitTime = req.getParameter("visitTime");
-        String reason1 = req.getParameter("고려요인1");
-        String reason2 = req.getParameter("고려요인2");
-        String transportaion = req.getParameter("교통수단");
-        String typeOfCompanion = req.getParameter("동료");
-        String accomodation = req.getParameter("숙박");
-        String typeOftrip = req.getParameter("여행종류");
-        String howGetInfo = req.getParameter("정보습득방법");
-        String mainDestination = req.getParameter("주목적");
+        String numOfCompanion = getParam(req,"numOfCompanion");
+        String stayDuration = getParam(req,"stayDuration");
+        String visitTime = getParam(req,"visitTime");
+        String reason1 = getParam(req,"considerReason1");
+        String reason2 = getParam(req, "considerReason2");
+        String transportation = getParam(req, "transportation");
+        String typeOfCompanion = getParam(req, "companion");
+        String accomodation = getParam(req, "accomodation");
+        String tripType = getParam(req,"tripType");
+        String howGetInfo = getParam(req,"infoGet");
+        String mainDestination = getParam(req, "primeReason");
+        String job = getParam(req, "job");
 
 //        String residence = req.getParameter("큐텔에서준비해줄것");
 //        String gender = req.getParameter("큐텔에서준비해줄것");
@@ -83,7 +96,7 @@ public class Result extends HttpServlet {
         String residence = "1";
         String gender = "1";
         String education = "1";
-        String birthYear = "1";
+        String birthYear = "1994";
 
         int currentMonth = Calendar.MONTH;
 
@@ -101,7 +114,7 @@ public class Result extends HttpServlet {
 
         int iAccomodation = Integer.parseInt(accomodation);
         StringBuilder AccomodationBuilder = new StringBuilder();
-        for (int i = 1 ;  i <= 6 ; i++){
+        for (int i = 1 ;  i <= 8 ; i++){
             if ( i == iAccomodation ){
                 AccomodationBuilder.append(i + " ");
             }
@@ -112,13 +125,15 @@ public class Result extends HttpServlet {
         String codeAccomodation = AccomodationBuilder.toString();
 
         String input = visitTime + " " + stayDuration + " " + mainDestination + " " + reason1 + " " +
-                reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + " 0 " + numOfCompanion + " " +
-                codeAccomodation + " " + transportaion + " " + typeOftrip + " " + residence + " " + gender + " " + education + " " +
-                birthYear + " " + currentMonth;
+                reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + numOfCompanion + " "+ " 0 " +
+                codeAccomodation + " " + transportation + " " + tripType + " " + residence + " " + gender + " " + education + " " +
+                birthYear + " "  + job + " " +  currentMonth;
         //일단 미성년자 0으로 두기
 
         return input;
     }
+
+
 
 }
 
