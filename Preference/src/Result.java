@@ -36,7 +36,7 @@ public class Result extends HttpServlet {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(path + "/input");
             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
-            bufferedOutputStream.write(path.getBytes());
+            bufferedOutputStream.write(input.getBytes());
             bufferedOutputStream.close();
         } catch (java.io.IOException e) {
             e.printStackTrace();
@@ -46,6 +46,7 @@ public class Result extends HttpServlet {
 
         try {
             printWriter = resp.getWriter();
+            printWriter.println(path +"/input");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,28 +63,29 @@ public class Result extends HttpServlet {
         }
 
     }
+
     private String getInputText(HttpServletRequest req){
-        String numOfCompanion = req.getParameter("numOfCompanion");
-        String stayDuration = req.getParameter("stayDuration");
-        String visitTime = req.getParameter("visitTime");
-        String reason1 = req.getParameter("고려요인1");
-        String reason2 = req.getParameter("고려요인2");
-        String transportaion = req.getParameter("교통수단");
-        String typeOfCompanion = req.getParameter("동료");
-        String accomodation = req.getParameter("숙박");
-        String typeOftrip = req.getParameter("여행종류");
-        String howGetInfo = req.getParameter("정보습득방법");
-        String mainDestination = req.getParameter("주목적");
+        Filler filler = Filler.getInstance(req);
 
-//        String residence = req.getParameter("큐텔에서준비해줄것");
-//        String gender = req.getParameter("큐텔에서준비해줄것");
-//        String education = req.getParameter("큐텔에서준비해줄것");
-//        String birthYear = req.getParameter("큐텔에서준비해줄것");
-
+        // TODO: 큐텔에서 파라미터 준비해주는 대로 수정 필요
         String residence = "1";
         String gender = "1";
         String education = "1";
-        String birthYear = "1";
+        String birthYear = "1994";
+
+        String job = filler.fillJob();
+        String numOfCompanion = filler.fillNumOfCompanion();
+        String typeOfCompanion = filler.fillTypeOfCompanion();
+        String howGetInfo = filler.fillHowGetInfo();
+        String stayDuration = filler.fillStayDuration();
+        String visitTime = filler.fillVisitTime();
+        String minorPresence = filler.fillMinorPresence();
+        String transportation = filler.fillTransportation();
+        String reason1 = filler.fillReason1();
+        String reason2 = filler.fillReason2();
+        String mainDestination = filler.fillMainDest();
+        String tripType = filler.fillTripType();
+        String accomodation = filler.fillAccomodation();
 
         int currentMonth = Calendar.MONTH;
 
@@ -101,7 +103,7 @@ public class Result extends HttpServlet {
 
         int iAccomodation = Integer.parseInt(accomodation);
         StringBuilder AccomodationBuilder = new StringBuilder();
-        for (int i = 1 ;  i <= 6 ; i++){
+        for (int i = 1 ;  i <= 8 ; i++){
             if ( i == iAccomodation ){
                 AccomodationBuilder.append(i + " ");
             }
@@ -112,13 +114,14 @@ public class Result extends HttpServlet {
         String codeAccomodation = AccomodationBuilder.toString();
 
         String input = visitTime + " " + stayDuration + " " + mainDestination + " " + reason1 + " " +
-                reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + " 0 " + numOfCompanion + " " +
-                codeAccomodation + " " + transportaion + " " + typeOftrip + " " + residence + " " + gender + " " + education + " " +
-                birthYear + " " + currentMonth;
-        //일단 미성년자 0으로 두기
+                reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + numOfCompanion + " "+ minorPresence +
+                codeAccomodation + " " + transportation + " " + tripType + " " + residence + " " + gender + " " + education + " " +
+                birthYear + " "  + job + " " +  currentMonth;
 
         return input;
     }
+
+
 
 }
 
