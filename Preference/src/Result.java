@@ -64,39 +64,28 @@ public class Result extends HttpServlet {
 
     }
 
-    //if you want set defaulut value, fix this
-    private String getParam(HttpServletRequest req, String s){
-        if (req.getParameter("s").equals("guide")){
-            return "0";
-        } else if(req.getParameter("s") == null){
-            return "0";
-        }
-        else return req.getParameter(s);
-    }
-
     private String getInputText(HttpServletRequest req){
-        String numOfCompanion = getParam(req,"numOfCompanion");
-        String stayDuration = getParam(req,"stayDuration");
-        String visitTime = getParam(req,"visitTime");
-        String reason1 = getParam(req,"considerReason1");
-        String reason2 = getParam(req, "considerReason2");
-        String transportation = getParam(req, "transportation");
-        String typeOfCompanion = getParam(req, "companion");
-        String accomodation = getParam(req, "accomodation");
-        String tripType = getParam(req,"tripType");
-        String howGetInfo = getParam(req,"infoGet");
-        String mainDestination = getParam(req, "primeReason");
-        String job = getParam(req, "job");
+        Filler filler = Filler.getInstance(req);
 
-//        String residence = req.getParameter("큐텔에서준비해줄것");
-//        String gender = req.getParameter("큐텔에서준비해줄것");
-//        String education = req.getParameter("큐텔에서준비해줄것");
-//        String birthYear = req.getParameter("큐텔에서준비해줄것");
-
+        // TODO: 큐텔에서 파라미터 준비해주는 대로 수정 필요
         String residence = "1";
         String gender = "1";
         String education = "1";
         String birthYear = "1994";
+
+        String job = filler.fillJob();
+        String numOfCompanion = filler.fillNumOfCompanion();
+        String typeOfCompanion = filler.fillTypeOfCompanion();
+        String howGetInfo = filler.fillHowGetInfo();
+        String stayDuration = filler.fillStayDuration();
+        String visitTime = filler.fillVisitTime();
+        String minorPresence = filler.fillMinorPresence();
+        String transportation = filler.fillTransportation();
+        String reason1 = filler.fillReason1();
+        String reason2 = filler.fillReason2();
+        String mainDestination = filler.fillMainDest();
+        String tripType = filler.fillTripType();
+        String accomodation = filler.fillAccomodation();
 
         int currentMonth = Calendar.MONTH;
 
@@ -125,10 +114,9 @@ public class Result extends HttpServlet {
         String codeAccomodation = AccomodationBuilder.toString();
 
         String input = visitTime + " " + stayDuration + " " + mainDestination + " " + reason1 + " " +
-                reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + numOfCompanion + " "+ " 0 " +
+                reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + numOfCompanion + " "+ minorPresence +
                 codeAccomodation + " " + transportation + " " + tripType + " " + residence + " " + gender + " " + education + " " +
                 birthYear + " "  + job + " " +  currentMonth;
-        //일단 미성년자 0으로 두기
 
         return input;
     }
