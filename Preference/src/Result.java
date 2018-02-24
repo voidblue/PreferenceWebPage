@@ -64,6 +64,18 @@ public class Result extends HttpServlet {
 
     }
 
+    private String getParam(HttpServletRequest req, String s){
+    if (req.getParameter("s").equals("guide")){
+        return "0";
+            } else if(req.getParameter("s") == null){
+                return "0";
+            }
+        else return req.getParameter(s);
+    }
+
+
+
+
     private String getInputText(HttpServletRequest req){
         Filler filler = Filler.getInstance(req);
 
@@ -72,20 +84,33 @@ public class Result extends HttpServlet {
         String gender = "1";
         String education = "1";
         String birthYear = "1994";
+        String job = "1";
 
-        String job = filler.fillJob();
-        String numOfCompanion = filler.fillNumOfCompanion();
-        String typeOfCompanion = filler.fillTypeOfCompanion();
-        String howGetInfo = filler.fillHowGetInfo();
-        String stayDuration = filler.fillStayDuration();
-        String visitTime = filler.fillVisitTime();
-        String minorPresence = filler.fillMinorPresence();
-        String transportation = filler.fillTransportation();
-        String reason1 = filler.fillReason1();
-        String reason2 = filler.fillReason2();
-        String mainDestination = filler.fillMainDest();
-        String tripType = filler.fillTripType();
-        String accomodation = filler.fillAccomodation();
+        String numOfCompanion = getParam(req,"numOfCompanion");
+        String stayDuration = getParam(req,"stayDuration");
+        String visitTime = getParam(req,"visitTime");
+        String reason1 = getParam(req,"considerReason1");
+        String reason2 = getParam(req, "considerReason2");
+        String transportation = getParam(req, "transportation");
+        String typeOfCompanion = getParam(req, "companion");
+        String accomodation = getParam(req, "accomodation");
+        String tripType = getParam(req,"tripType");
+        String howGetInfo = getParam(req,"infoGet");
+        String mainDestination = getParam(req, "primeReason");
+
+        String spssJob = filler.fillJob();
+        String spssNumOfCompanion = filler.fillNumOfCompanion();
+        String spssTypeOfCompanion = filler.fillTypeOfCompanion();
+        String spssHowGetInfo = filler.fillHowGetInfo();
+        String spssstayDuration = filler.fillStayDuration();
+        String spssvisitTime = filler.fillVisitTime();
+        String spssminorPresence = filler.fillMinorPresence();
+        String spsstransportation = filler.fillTransportation();
+        String spssreason1 = filler.fillReason1();
+        String spssreason2 = filler.fillReason2();
+        String spssmainDestination = filler.fillMainDest();
+        String spsstripType = filler.fillTripType();
+        String spssaccomodation = filler.fillAccomodation();
 
         int currentMonth = Calendar.MONTH;
 
@@ -114,7 +139,7 @@ public class Result extends HttpServlet {
         String codeAccomodation = AccomodationBuilder.toString();
 
         String input = visitTime + " " + stayDuration + " " + mainDestination + " " + reason1 + " " +
-                reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + numOfCompanion + " "+ minorPresence +
+                reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + numOfCompanion + " "+ "0" +
                 codeAccomodation + " " + transportation + " " + tripType + " " + residence + " " + gender + " " + education + " " +
                 birthYear + " "  + job + " " +  currentMonth;
 
