@@ -145,8 +145,4 @@ public class Result extends HttpServlet {
 
         return input;
     }
-
-
-
 }
-
