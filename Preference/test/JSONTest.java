@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 public class JSONTest {
     @Test
     public void test(){
-//        Recommend recommend = Recommend.getTempExcutedIntance();
-//        String[] result = recommend.getResult().split("ESC");
+//        RecommendRunner Recommender = RecommendRunner.getTempExcutedIntance();
+//        String[] result = Recommender.getResult().split("ESC");
 
         String[] result = {" ㅌㅌㅌㅌㅌ", "여행지", "(0,0)", "여행지", "(0,0)", "여행지", "(0,0)", "여행지", "(0,0)", "여행지", "(0,0)"};
 
