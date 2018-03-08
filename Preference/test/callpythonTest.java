@@ -11,7 +11,7 @@ public class callpythonTest {
             String path = getClass().getResource("").getPath();
             System.out.println(path);
 //            String prg = "import sys\nprint int(sys.argv[1])+int(sys.argv[2])\n";
-            BufferedWriter out = new BufferedWriter(new FileWriter(path+"/Preferenceproject/Recommend.py"));
+            BufferedWriter out = new BufferedWriter(new FileWriter(path+"/Preferenceproject/RecommendRunner.py"));
 //            out.write(prg);
             out.close();
 //            int number1 = 10;
@@ -35,7 +35,7 @@ public class callpythonTest {
 //    public void test2() throws IOException {
 //        Process p = null;
 //        try{
-//            p= Runtime.getRuntime().exec("python3 /home/voidbluelabtop/Desktop/python/Preferenceproject/Recommend.py");
+//            p= Runtime.getRuntime().exec("python3 /home/voidbluelabtop/Desktop/python/Preferenceproject/RecommendRunner.py");
 //            p.waitFor();
 //        } catch (IOException ex){
 //            System.out.println(ex.getMessage());} catch (InterruptedException e) {

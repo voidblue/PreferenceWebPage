@@ -1,21 +1,19 @@
-import javax.servlet.annotation.WebServlet;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 
 
-public class Recommend {
+public class RecommendRunner {
     private String result;
-    public static Recommend getInstance(){
-        return new Recommend();
+    public static RecommendRunner getInstance(){
+        return new RecommendRunner();
     }
 
-    public static Recommend getTempExcutedIntance(){
+    public static RecommendRunner getTempExcutedIntance(){
         String path = System.getProperty("user.dir");
         path += "/webapps/ROOT/WEB-INF/classes";
 //        path += "/out/production/Preference";
-        Recommend recommend = new Recommend();
+        RecommendRunner recommend = new RecommendRunner();
         try {
             recommend.execute(path + "/build/exe.linux-x86_64-3.5/recommend");
         } catch (IOException e) {
@@ -24,7 +22,7 @@ public class Recommend {
         System.out.println(path + "/build/exe.linux-x86_64-3.5/recommend");
         return recommend;
     }
-    private Recommend(){
+    private RecommendRunner(){
 
     }
 
