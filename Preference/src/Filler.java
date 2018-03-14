@@ -44,18 +44,6 @@ public class Filler {
         return result;
     }
 
-    public String fillJob()
-    {
-        String job = req.getParameter("job");
-
-        if (isEmpty(job))
-        {
-            job = "전문가 및 관련종사자";
-        }
-
-        return job;
-    }
-
     public String fillNumOfCompanion()
     {
         String numOfCompanion = req.getParameter("numOfCompanion");
@@ -64,11 +52,12 @@ public class Filler {
         {
             // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함
 //            String age = req.getParameter("연령");
+//            String job = req.getParameter("직업");
             String age = yearToAge("1994");
-            String job = fillJob();
-            if (age.equals("30대") && job.equals("주부")) { numOfCompanion = "3~4명"; }
-            else if (age.equals("40대")) { numOfCompanion = "3~4명"; }
-            else { numOfCompanion = "2명"; }
+            String job = "1";
+            if (age.equals("30대") && job.equals("12")) { numOfCompanion = "3"; }
+            else if (age.equals("40대")) { numOfCompanion = "3"; }
+            else { numOfCompanion = "2"; }
         }
 
         return numOfCompanion;
@@ -82,18 +71,19 @@ public class Filler {
         {
             // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함
 //            String age = req.getParameter("연령");
-            String age = yearToAge("1994");
 //            String education = req.getParameter("학력");
+////            String job = req.getParameter("직업");
             String education = "1";
-            String job = fillJob();
+            String age = yearToAge("1994");
+            String job = "1";
 
-            if (age.equals("10대") && education.equals("대학생")) { typeOfCompanion = "친구"; }
+            if (age.equals("10대") && education.equals("2")) { typeOfCompanion = "5"; }
             else if (age.equals("20대")) {
-                if (job.equals("학생") || job.equals("판매종사자") || job.equals("장치기계조작 및 조립종사자")
-                        || job.equals("무직") || job.equals("서비스종사자")) {
-                    typeOfCompanion = "친구";
-                } else { typeOfCompanion = "부부/연인"; }
-            } else { typeOfCompanion = "가족/친척"; }
+                if (job.equals("11") || job.equals("5") || job.equals("8")
+                        || job.equals("13") || job.equals("4")) {
+                    typeOfCompanion = "5";
+                } else { typeOfCompanion = "2"; }
+            } else { typeOfCompanion = "3"; }
         }
 
         return typeOfCompanion;
@@ -101,7 +91,7 @@ public class Filler {
 
     public String fillHowGetInfo()
     {
-        String howGetInfo = req.getParameter("정보습득방법");
+        String howGetInfo = req.getParameter("infoGet");
 
         if (isEmpty(howGetInfo))
         {
@@ -109,8 +99,8 @@ public class Filler {
 //            String age = req.getParameter("연령");
             String age = yearToAge("1994");
 
-            if (age.equals("60대") || age.equals("70대")) { howGetInfo = "친구/친지/동료"; }
-            else { howGetInfo = "인터넷 정보검색"; }
+            if (age.equals("60대") || age.equals("70대")) { howGetInfo = "2"; }
+            else { howGetInfo = "3"; }
         }
 
         return howGetInfo;
@@ -124,8 +114,8 @@ public class Filler {
         {
             int currentMonth = Calendar.MONTH;
 
-            if(currentMonth == 7 || currentMonth == 8) { stayDuration = "4~5일"; }
-            else { stayDuration = "2~3일"; }
+            if(currentMonth == 7 || currentMonth == 8) { stayDuration = "4"; }
+            else { stayDuration = "3"; }
         }
 
         return stayDuration;
@@ -145,9 +135,9 @@ public class Filler {
             int currentMonth = Calendar.MONTH;
 
             if (age.equals("30대")) {
-                if (currentMonth == 1 || currentMonth == 2) { visitTime = "처음"; }
-            } else if (education.equals("대학생") || education.equals("https://github.com/voidblue/PortalService고졸이하")) { visitTime = "처음"; }
-            else { visitTime = "2~3회"; }
+                if (currentMonth == 1 || currentMonth == 2) { visitTime = "1"; }
+            } else if (education.equals("2") || education.equals("1")) { visitTime = "1"; }
+            else { visitTime = "2"; }
         }
 
         return visitTime;
@@ -164,7 +154,7 @@ public class Filler {
 //            String age = req.getParameter("연령");
             String age = yearToAge("1994");
 
-            if (typeOfCompanion.equals("가족/친척")) {
+            if (typeOfCompanion.equals("3")) {
                 if (age.equals("30대") || age.equals("40대") || age.equals("70대")) { minorPresence = "1";}
             } else { minorPresence = "0"; }
         }
@@ -174,14 +164,14 @@ public class Filler {
 
     public String fillTransportation()
     {
-        String transportaion = req.getParameter("교통수단");
+        String transportaion = req.getParameter("transportation");
 
         if (isEmpty(transportaion)) {
             String numOfCompanion = fillNumOfCompanion();
 
-            if (numOfCompanion.equals("혼자")) { transportaion = "대중교통"; }
-            else if (numOfCompanion.equals("10명 이상")) { transportaion = "전세버스"; }
-            else { numOfCompanion = "렌터카"; }
+            if (numOfCompanion.equals("1")) { transportaion = "3"; }
+            else if (numOfCompanion.equals("10")) { transportaion = "4"; }
+            else { numOfCompanion = "1"; }
         }
 
         return transportaion;
@@ -189,21 +179,21 @@ public class Filler {
 
     public String fillReason1()
     {
-        String reason1 = req.getParameter("고려요인1");
+        String reason1 = req.getParameter("considerReason1");
 
         if (isEmpty(reason1))
         {
             String howGetInfo = fillHowGetInfo();
             String transportaion = fillTransportation();
 
-            if (howGetInfo.equals("과거여행경험") || howGetInfo.equals("신문/잡지/서적")
-                    || howGetInfo.equals("TV/라디오")) {
-                if (transportaion.equals("자전거/라디오") || transportaion.equals("대절택시")
-                        || transportaion.equals("시티투어버스"))
+            if (howGetInfo.equals("8") || howGetInfo.equals("5")
+                    || howGetInfo.equals("6")) {
+                if (transportaion.equals("6") || transportaion.equals("2")
+                        || transportaion.equals("5"))
                 {
-                    reason1 = "휴양/휴식";
+                    reason1 = "2";
                 }
-            } else { reason1 = "자연경관감상"; }
+            } else { reason1 = "1"; }
         }
 
         return reason1;
@@ -211,16 +201,16 @@ public class Filler {
 
     public String fillReason2()
     {
-        String reason2 = req.getParameter("고려요인2");
+        String reason2 = req.getParameter("considerReason2");
 
         if (isEmpty(reason2))
         {
             String reason1 = fillReason1();
 
-            if (reason1.equals("자연경관감상") || reason1.equals("가까운거리")) { reason2 = "휴양/휴식"; }
-            else if (reason1.equals("여행비용") || reason1.equals("기후/사계절") || reason1.equals("안전/치안")
-                    || reason1.equals("한류관광지방문")) { reason2 = "가까운거리"; }
-            else { reason2 = "음식/미식탐방"; }
+            if (reason1.equals("1") || reason1.equals("8")) { reason2 = "2"; }
+            else if (reason1.equals("7") || reason1.equals("6") || reason1.equals("9")
+                    || reason1.equals("10")) { reason2 = "8"; }
+            else { reason2 = "4"; }
         }
 
         return reason2;
@@ -228,7 +218,7 @@ public class Filler {
 
     public String fillMainDest()
     {
-        String mainDestination = req.getParameter("주목적");
+        String mainDestination = req.getParameter("primeReason");
 
         if (isEmpty(mainDestination))
         {
@@ -240,16 +230,16 @@ public class Filler {
 
     public String fillTripType()
     {
-        String typeOftrip = req.getParameter("여행종류");
+        String typeOftrip = req.getParameter("tripType");
 
         if (isEmpty(typeOftrip)) {
             String transportation = fillTransportation();
             String numOfCompanion = fillNumOfCompanion();
 
-            if (transportation.equals("전세버스")) { typeOftrip = "패키지여행"; }
-            else if (transportation.equals("대절택시") || transportation.equals("시티투어버스")) {
-                if (numOfCompanion.equals("5~9명") || numOfCompanion.equals("10명 이상")) { typeOftrip = "패키지여행"; }
-            } else { typeOftrip = "개별여행"; }
+            if (transportation.equals("4")) { typeOftrip = "2"; }
+            else if (transportation.equals("2") || transportation.equals("5")) {
+                if (numOfCompanion.equals("5") || numOfCompanion.equals("10")) { typeOftrip = "2"; }
+            } else { typeOftrip = "1"; }
         }
 
         return typeOftrip;
@@ -257,7 +247,7 @@ public class Filler {
 
     public String fillAccomodation()
     {
-        String accomodation = req.getParameter("숙박");
+        String accomodation = req.getParameter("accomodation");
 
         if (isEmpty(accomodation))
         {
@@ -269,15 +259,15 @@ public class Filler {
             String age = yearToAge("1994");
 
 
-            if (typeOfCompanion.equals("친구") || typeOfCompanion.equals("혼자왔음")) {
-                if (age.equals("20대") && stayDuration.equals("4~5일")) { accomodation = "게스트하우스"; }
+            if (typeOfCompanion.equals("5") || typeOfCompanion.equals("1")) {
+                if (age.equals("20대") && stayDuration.equals("4")) { accomodation = "3"; }
                 else if (age.equals("10대") || age.equals("30대")) {
-                    if (transportaion.equals("대중교통") || transportaion.equals("자전거/오토바이")
-                            || transportaion.equals("시티투어버스")) {
-                        accomodation = "게스트하우스";
+                    if (transportaion.equals("3") || transportaion.equals("6")
+                            || transportaion.equals("5")) {
+                        accomodation = "3";
                     }
                 }
-            } else { accomodation = "호텔"; }
+            } else { accomodation = "1"; }
         }
 
         return accomodation;
