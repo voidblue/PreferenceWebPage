@@ -8,12 +8,12 @@ public class UserData {
     public void getConnect() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
 
-        connection = DriverManager.getConnection("jdbc:mysql://220.149.42.125:3306/preference?encoding=utf8","root","456111");
+        connection = DriverManager.getConnection("jdbc:mysql://220.149.42.125:3306/preference?characterEncoding=utf-8","root","456111");
     }
 
     public HashMap getData(String userId) throws SQLException {
         HashMap hashMap = new HashMap();
-        PreparedStatement preparedStatement = connection.prepareStatement("select * from user where id =?");
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from USERS where ID =?");
         preparedStatement.setString(1, userId);
 
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -21,7 +21,7 @@ public class UserData {
         String sex = getSex(resultSet);
         String birth = resultSet.getString("BIRTH");
         String education = getEducation(resultSet);
-        String job = resultSet.getString("JOB");
+        String job = getJob(resultSet);
         hashMap.put("sex", sex);
         hashMap.put("birth", birth);
         hashMap.put("education", education);
@@ -58,7 +58,7 @@ public class UserData {
         else if(job.equals("판매종사자")) result = "4";
         else if(job.equals("농림어업숙련 종사자" )) result = "5";
         else if(job.equals("기능원 및 관련 기능종사자")) result = "6";
-        else if(job.equals("장치기계조작 및 조립종사자")) result = "7";
+        else if(job.equals("장치기계조작 및 조립종사자 : ")) result = "7";
         else if(job.equals("단순노무자")) result = "8";
         else if(job.equals("군인/공무원")) result = "9";
         else if(job.equals("학생")) result = "10";

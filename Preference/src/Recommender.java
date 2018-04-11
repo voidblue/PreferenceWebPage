@@ -56,37 +56,18 @@ public class Recommender extends HttpServlet {
 
         RecommendRunner recommend = RecommendRunner.getTempExcutedIntance();
         String[] result = recommend.getResult().split("ESC");
-        JSONArray jsonArray = new JSONArray();
-        JSONObject jsonObject = new JSONObject();
+        ArrayList<String> sightSeeingSpots = new ArrayList();
         for (int i = 1; i < result.length ; i++){
             if (i % 2 == 1) {
                 String str = (i/2 + 1) + "순위 여행지";
-                try {
-                    jsonObject.put(str ,result[i]);
-                } catch (JSONException e) {
-                    printWriter.println(e.getMessage());
-                }
+                sightSeeingSpots.add(result[i]);
             }
-            else {
-                try {
-                    jsonObject.put("좌표", result[i]);
-                } catch (JSONException e) {
-                    printWriter.println(e.getMessage());
-                }
-                jsonArray.put(jsonObject);
-                jsonObject = new JSONObject();
 
-            }
         }
         boolean isFirst = true;
-        printWriter.println(jsonArray.toString() + "<br>");
-        for (String e : result) {
-            if (!isFirst) {    //스플릿 한 것중 첫번쨰 문자열은 안쓰는걸로
-                printWriter.println(e + "<br>");
-            }
-            isFirst = false;
+        for (String e : sightSeeingSpots) {
+            printWriter.println(e + "<br>");
         }
-
     }
 
 
@@ -103,14 +84,10 @@ public class Recommender extends HttpServlet {
 
 
     private String getInputText(HttpServletRequest req){
-        Filler filler = new Filler(req);
+//        Filler filler = new Filler(req);
 
         // TODO: 큐텔에서 파라미터 준비해주는 대로 수정 필요
         String residence = "1";
-        String gender = "1";
-        String education = "1";
-        String birthYear = "1994";
-        String job = "1";
 
 
         String numOfCompanion = getParam(req,"numOfCompanion");
@@ -145,19 +122,19 @@ public class Recommender extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        String spssNumOfCompanion = filler.fillNumOfCompanion();
-        String spssTypeOfCompanion = filler.fillTypeOfCompanion();
-        String spssHowGetInfo = filler.fillHowGetInfo();
-        String spssstayDuration = filler.fillStayDuration();
-        String spssvisitTime = filler.fillVisitTime();
-        String spssminorPresence = filler.fillMinorPresence();
-        String spsstransportation = filler.fillTransportation();
-        String spssreason1 = filler.fillReason1();
-        String spssreason2 = filler.fillReason2();
-        String spssmainDestination = filler.fillMainDest();
-        String spsstripType = filler.fillTripType();
-        String spssaccomodation = filler.fillAccomodation();
+//
+//        String spssNumOfCompanion = filler.fillNumOfCompanion();
+//        String spssTypeOfCompanion = filler.fillTypeOfCompanion();
+//        String spssHowGetInfo = filler.fillHowGetInfo();
+//        String spssstayDuration = filler.fillStayDuration();
+//        String spssvisitTime = filler.fillVisitTime();
+//        String spssminorPresence = filler.fillMinorPresence();
+//        String spsstransportation = filler.fillTransportation();
+//        String spssreason1 = filler.fillReason1();
+//        String spssreason2 = filler.fillReason2();
+//        String spssmainDestination = filler.fillMainDest();
+//        String spsstripType = filler.fillTripType();
+//        String spssaccomodation = filler.fillAccomodation();
 
         int currentMonth = Calendar.MONTH;
 
@@ -187,10 +164,13 @@ public class Recommender extends HttpServlet {
         }
         String codeAccomodation = AccomodationBuilder.toString();
 
-        String input = visitTime + " " + stayDuration + " " + mainDestination + " " + reason1 + " " +
-                reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + " " + numOfCompanion + " "+ "0 " +
-                codeAccomodation + " " + transportation + " " + tripType + " " + residence + " " + userDataList.get("sex") + " " + userDataList.get("education") + " " +
-                userDataList.get("birth") + " "  + userDataList.get("job") + " " +  currentMonth;
+        String input = null;
+        if (userDataList != null) {
+            input = visitTime + " " + stayDuration + " " + mainDestination + " " + reason1 + " " +
+                    reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + " " + numOfCompanion + " "+ "0 " +
+                    codeAccomodation + " " + transportation + " " + tripType + " " + residence + " " + userDataList.get("sex") + " " + userDataList.get("education") + " " +
+                    userDataList.get("birth") + " "  + userDataList.get("job") + " " +  currentMonth;
+        }
 
         return input;
     }

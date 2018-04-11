@@ -143,24 +143,24 @@ public class Filler {
         return visitTime;
     }
 
-    public String fillMinorPresence()
-    {
-        // TODO : 파라미터 이름 확인 및 수정 필요
-        String minorPresence = req.getParameter("만15세미만동반유무");
-
-        if (isEmpty(minorPresence))
-        {
-            String typeOfCompanion = fillTypeOfCompanion();
-//            String age = req.getParameter("연령");
-            String age = yearToAge("1994");
-
-            if (typeOfCompanion.equals("3")) {
-                if (age.equals("30대") || age.equals("40대") || age.equals("70대")) { minorPresence = "1";}
-            } else { minorPresence = "0"; }
-        }
-
-        return minorPresence;
-    }
+//    public String fillMinorPresence()
+//    {
+//        // TODO : 파라미터 이름 확인 및 수정 필요
+//        String minorPresence = req.getParameter("만15세미만동반유무");
+//
+//        if (isEmpty(minorPresence))
+//        {
+//            String typeOfCompanion = fillTypeOfCompanion();
+////            String age = req.getParameter("연령");
+//            String age = yearToAge("1994");
+//
+//            if (typeOfCompanion.equals("3")) {
+//                if (age.equals("30대") || age.equals("40대") || age.equals("70대")) { minorPresence = "1";}
+//            } else { minorPresence = "0"; }
+//        }
+//
+//        return minorPresence;
+//    }
 
     public String fillTransportation()
     {
