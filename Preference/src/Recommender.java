@@ -6,7 +6,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class Recommender extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp){
@@ -122,6 +125,27 @@ public class Recommender extends HttpServlet {
         String howGetInfo = getParam(req,"infoGet");
         String mainDestination = getParam(req, "primeReason");
 
+        String id = req.getParameter("id");
+        UserData userData = new UserData();
+        try {
+            userData.getConnect();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            userData.getData(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        HashMap userDataList = null;
+        try {
+            userDataList = userData.getData(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         String spssNumOfCompanion = filler.fillNumOfCompanion();
         String spssTypeOfCompanion = filler.fillTypeOfCompanion();
         String spssHowGetInfo = filler.fillHowGetInfo();
@@ -165,8 +189,8 @@ public class Recommender extends HttpServlet {
 
         String input = visitTime + " " + stayDuration + " " + mainDestination + " " + reason1 + " " +
                 reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + " " + numOfCompanion + " "+ "0 " +
-                codeAccomodation + " " + transportation + " " + tripType + " " + residence + " " + gender + " " + education + " " +
-                birthYear + " "  + job + " " +  currentMonth;
+                codeAccomodation + " " + transportation + " " + tripType + " " + residence + " " + userDataList.get("sex") + " " + userDataList.get("education") + " " +
+                userDataList.get("birth") + " "  + userDataList.get("job") + " " +  currentMonth;
 
         return input;
     }

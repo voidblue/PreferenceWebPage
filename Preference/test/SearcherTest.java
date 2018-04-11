@@ -44,7 +44,7 @@ public class SearcherTest {
                 "신라면세점+롯데면세점+제주관광공사면세점+공항JDC면세점+제주목관아+항몽유적지+성읍민속마을+삼양동선사유적" +
                 "+제주추사관+관덕정+이중섭거주지+하멜기념비+미로공원+에코랜드+제주경마공원+불교사찰+아쿠아플라넷+" +
                 "테디베어박물관+소인국테마파크+잠수함관광+신비의도로+생각하는정원+드라마촬영지+제주별빛누리공원+" +
-                "유람선+제주바다체험장+골프장+카지노 = 7;";
+                "유람선+제주바다체험장+골프장+카지노 >= 7;";
 
         Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(testsetSQL);
