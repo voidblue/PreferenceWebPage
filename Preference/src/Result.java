@@ -33,5 +33,8 @@ public class Result extends HttpServlet {
             e.printStackTrace();
         }
 
+        jsonArray.put(jsonObject);
+        printWriter.print(jsonArray.toString());
+
     }
 }
