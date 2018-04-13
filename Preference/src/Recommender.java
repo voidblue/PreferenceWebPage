@@ -59,15 +59,57 @@ public class Recommender extends HttpServlet {
         ArrayList<String> sightSeeingSpots = new ArrayList();
         for (int i = 1; i < result.length ; i++){
             if (i % 2 == 1) {
-                String str = (i/2 + 1) + "순위 여행지";
                 sightSeeingSpots.add(result[i]);
             }
 
         }
         boolean isFirst = true;
+        printWriter.println("<!DOCTYPE html>");
+        printWriter.println("<html>");
+        printWriter.println("<head>");
+
+        printWriter.println("<title></title>");
+        printWriter.println("<meta charset=\"utf-8\">");
+        printWriter.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
+        printWriter.println("<style> .button { \n"+
+                "margin: 0;\n"+
+                "border: 0;\n"+
+                "font-size: 18px;\n"+
+                "width: 200px;\n"+
+                "height: 50px;\n"+
+                "box-sizing: border-box;\n"+
+                "-webkit-box-sizing: border-box;\n"+
+                "-moz-box-sizing: border-box;\n"+
+                "-webkit-user-select: none;\n"+
+                "cursor: default;\n"+
+                "}\n"+
+                ".button:hover {\n"+
+                "cursor: pointer;\n"+
+                "}\n"+
+                ".button {\n"+
+                "color: #000000;\n"+
+                "border: #000000 solid 1px;\n"+
+                "padding: 10px;\n"+
+                "background-color: #ffffff;\n"+
+                "}\n"+
+                ".button:hover {\n"+
+                "color: #ffffff;\n"+
+                "background-color: #000000;\n"+
+                        "} </style");
+        printWriter.println("</head>");
+
+        printWriter.println("<body>");
+
+
+
+
         for (String e : sightSeeingSpots) {
-            printWriter.println(e + "<br>");
+            printWriter.println("<a href=\"#\" class=\"button\">" + e +"</a>");
         }
+
+
+        printWriter.println("</body>");
+        printWriter.println("</html>");
     }
 
 
@@ -83,10 +125,10 @@ public class Recommender extends HttpServlet {
 
 
 
+
     private String getInputText(HttpServletRequest req){
 //        Filler filler = new Filler(req);
 
-        // TODO: 큐텔에서 파라미터 준비해주는 대로 수정 필요
         String residence = "1";
 
 
