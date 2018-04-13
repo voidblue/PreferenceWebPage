@@ -76,13 +76,12 @@ public class Recommender extends HttpServlet {
         printWriter.println("<body>");
 
 
+        for (int i = 0 ; i < sightSeeingSpots.size(); i++){
+            printWriter.println("<a href=\"#\" class=\"button\" id = "+ i +">" + sightSeeingSpots.get(i) + "</a>");
 
-
-        for (String e : sightSeeingSpots) {
-            printWriter.println("<a href=\"#\" class=\"button\">" + e +"</a>");
         }
 
-
+        printWriter.println("<script src = \"javascript/Recommned.js\"></script>");
         printWriter.println("</body>");
         printWriter.println("</html>");
     }
