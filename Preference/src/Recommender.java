@@ -71,31 +71,6 @@ public class Recommender extends HttpServlet {
         printWriter.println("<title></title>");
         printWriter.println("<meta charset=\"utf-8\">");
         printWriter.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
-        printWriter.println("<style> .button { \n"+
-                "margin: 0;\n"+
-                "border: 0;\n"+
-                "font-size: 18px;\n"+
-                "width: 200px;\n"+
-                "height: 50px;\n"+
-                "box-sizing: border-box;\n"+
-                "-webkit-box-sizing: border-box;\n"+
-                "-moz-box-sizing: border-box;\n"+
-                "-webkit-user-select: none;\n"+
-                "cursor: default;\n"+
-                "}\n"+
-                ".button:hover {\n"+
-                "cursor: pointer;\n"+
-                "}\n"+
-                ".button {\n"+
-                "color: #000000;\n"+
-                "border: #000000 solid 1px;\n"+
-                "padding: 10px;\n"+
-                "background-color: #ffffff;\n"+
-                "}\n"+
-                ".button:hover {\n"+
-                "color: #ffffff;\n"+
-                "background-color: #000000;\n"+
-                        "} </style");
         printWriter.println("</head>");
 
         printWriter.println("<body>");
