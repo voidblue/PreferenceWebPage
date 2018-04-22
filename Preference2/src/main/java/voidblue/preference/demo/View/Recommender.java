@@ -1,24 +1,20 @@
-package voidblue.preference.demo;
+package voidblue.preference.demo.View;
 
+import lombok.Cleanup;
+import lombok.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import voidblue.preference.demo.Dao.UserDao;
+import voidblue.preference.demo.Dao.User;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 @Controller
-public class Recommender extends HttpServlet {
+public class Recommender {
 
     @PostMapping("/recommender")
     public String recommend(Model model, @RequestParam("numOfCompanion") String numOfCompanion,
@@ -28,7 +24,7 @@ public class Recommender extends HttpServlet {
                         @RequestParam("accomodation")String accomodation, @RequestParam("tripType")String tripType,
                         @RequestParam("infoGet")String howGetInfo, @RequestParam("primeReason") String mainDestination,
                         @RequestParam("id")String id){
-        //임시변수
+
         String residence = "1";
 
 
@@ -58,21 +54,21 @@ public class Recommender extends HttpServlet {
         String codeAccomodation = AccomodationBuilder.toString();
 
         String input = null;
-        HashMap userDataList = null;
-        UserData userData = new UserData();
+        User user = null;
+        UserDao userDao = new UserDao();
         try {
-            userDataList = userData.getData(id);
+            user = userDao.getUser(id);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        if (userDataList != null) {
-            input = visitTime + " " + stayDuration + " " + mainDestination + " " + reason1 + " " +
-                    reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + " " + numOfCompanion + " "+ "0 " +
-                    codeAccomodation + " " + transportation + " " + tripType + " " + residence + " " + userDataList.get("sex") + " " + userDataList.get("education") + " " +
-                    userDataList.get("birth") + " "  + userDataList.get("job") + " " +  currentMonth;
-        }
+
+        input = visitTime + " " + stayDuration + " " + mainDestination + " " + reason1 + " " +
+                reason2+ " " + howGetInfo + " " + codeTypeOfCompanion + " " + numOfCompanion + " "+ "0 " +
+                codeAccomodation + " " + transportation + " " + tripType + " " + residence + " " + user.getSex() + " " + user.getEducation() + " " +
+                user.getBirth() + " "  + user.getJob() + " " +  currentMonth;
+
         input = "# \n" + input;
 
 
@@ -84,7 +80,9 @@ public class Recommender extends HttpServlet {
 
 
         try {
+            @Cleanup
             FileOutputStream fileOutputStream = new FileOutputStream(path + "/input");
+            @Cleanup
             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
             bufferedOutputStream.write(input.getBytes());
             bufferedOutputStream.close();
@@ -92,26 +90,61 @@ public class Recommender extends HttpServlet {
         }
 
 
-
-        RecommendRunner recommend = RecommendRunner.getTempExcutedIntance();
-        String[] result = recommend.getResult().split("ESC");
-        ArrayList<String> sightSeeingSpots = new ArrayList();
+        String[] result = new String[0];
+        try {
+            result = excuteRecomender().split("ESC");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<SightSeeingSpot> sightSeeingSpots = new ArrayList();
+        int index = 0;
         for (int i = 1; i < result.length ; i++){
             if (i % 2 == 1) {
-                sightSeeingSpots.add(result[i]);
+                SightSeeingSpot sightSeeingSpot = new SightSeeingSpot();
+                sightSeeingSpot.setName(result[i]);
+                sightSeeingSpot.setRank(index);
+                index++;
+                sightSeeingSpots.add(sightSeeingSpot);
             }
 
         }
+        model.addAttribute("sightSeeingSpots",sightSeeingSpots);
+
         return "recommender";
     }
 
 
-    private String getParam(HttpServletRequest req, String s){
-    if (req.getParameter(s).equals("guide")){
-        return "0";
-            } else if(req.getParameter(s) == null){
-                return "0";
-            }
-        else return req.getParameter(s);
+
+
+    private String excuteRecomender() throws IOException {
+        String path = System.getProperty("user.dir");
+        path += "/out/production/classes/voidblue/preference/demo";
+//        path += "/out/production/Preference";
+        Process p = null;
+        try{
+            p = Runtime.getRuntime().exec(path + "/build/exe.linux-x86_64-3.5/recommend");
+            p.waitFor();
+        } catch (IOException ex){
+            System.out.println(ex.getMessage());} catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        StringBuffer sb = new StringBuffer();
+        @Cleanup
+        BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+        String str;
+        while((str=br.readLine())!=null){
+            sb.append(str);
+        }
+        return sb.toString();
     }
+
+
+
+}
+
+@Data
+class SightSeeingSpot {
+    private int rank;
+    private String name;
 }

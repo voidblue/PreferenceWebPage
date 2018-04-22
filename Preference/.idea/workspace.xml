@@ -91,8 +91,8 @@
       <file leaf-file-name="Recommender.class" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/out/production/Preference/Recommender.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="136" column="21" selection-start-line="136" selection-start-column="21" selection-end-line="136" selection-end-column="21" />
+            <state relative-caret-position="1648">
+              <caret line="143" column="13" lean-forward="true" selection-start-line="143" selection-start-column="13" selection-end-line="143" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -183,9 +183,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="912" />
-    <option name="y" value="94" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="469" />
+    <option name="y" value="148" />
     <option name="width" value="1245" />
     <option name="height" value="560" />
   </component>
@@ -501,7 +501,7 @@
       <workItem from="1524312327186" duration="1027000" />
       <workItem from="1524316568411" duration="689000" />
       <workItem from="1524318220715" duration="63000" />
-      <workItem from="1524318297561" duration="1239000" />
+      <workItem from="1524318297561" duration="1413000" />
     </task>
     <servers />
   </component>
@@ -538,10 +538,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26699000" />
+    <option name="totallyTimeSpent" value="26873000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <frame x="469" y="148" width="1245" height="560" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -557,7 +557,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3291536" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17681941" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2634538" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -844,8 +844,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/out/production/Preference/Recommender.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="136" column="21" selection-start-line="136" selection-start-column="21" selection-end-line="136" selection-end-column="21" />
+        <state relative-caret-position="1648">
+          <caret line="143" column="13" lean-forward="true" selection-start-line="143" selection-start-column="13" selection-end-line="143" selection-end-column="13" />
         </state>
       </provider>
     </entry>

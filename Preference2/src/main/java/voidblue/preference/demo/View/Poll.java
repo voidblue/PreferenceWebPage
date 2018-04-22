@@ -1,4 +1,4 @@
-package voidblue.preference.demo;
+package voidblue.preference.demo.View;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 @Controller
 public class Poll {
-    @GetMapping("/")
+    @GetMapping("/poll")
     public  String poll(Model model, @RequestParam("id") String id) throws SQLException, ClassNotFoundException, IOException {
 
 

@@ -1,11 +1,10 @@
 
-btn1 = document.getElementById("1")
-btn2 = document.getElementById("2")
-btn3 = document.getElementById("3")
-btn4 = document.getElementById("4")
-btn5 = document.getElementById("5")
+btn1 = document.getElementById("0")
+btn2 = document.getElementById("1")
+btn3 = document.getElementById("2")
+btn4 = document.getElementById("3")
+btn5 = document.getElementById("4")
 
-btns = [btn1, btn2, btn3, btn4, btn5]
 btn1.onclick = function (ev) {
     doPost(0)
 };
@@ -25,6 +24,7 @@ btn5.onclick = function (ev) {
 
 
 function doPost(selectedNum) {
+    btns = [btn1, btn2, btn3, btn4, btn5];
     var form = document.createElement("form");
     form.setAttribute("charset", "UTF-8");
     form.setAttribute("method", "Post"); // Get 또는 Post 입력
@@ -33,15 +33,23 @@ function doPost(selectedNum) {
     var hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("name", "selected");
-    hiddenField.setAttribute("value", btns[selectedNum].value());
-    btns.remove(selectedNum)
+    hiddenField.setAttribute("value", btns[selectedNum].innerHTML);
     form.appendChild(hiddenField);
 
-    for (i = 0 ; i < 4 ; i ++){
+    for (i = 0 ; i < 5 ; i ++) {
+        if (i == selectedNum) {
+            continue;
+        }
+
+        console.log(btns.length);
         hiddenField = document.createElement("input");
         hiddenField.setAttribute("type", "hidden");
-        hiddenField.setAttribute("name", "other"+i);
-        hiddenField.setAttribute("value", btns[i].value());
+        if (i > selectedNum) {
+            hiddenField.setAttribute("name", "other" + (i-1);
+        }else{
+            hiddenField.setAttribute("name", "other" + i);
+        }
+        hiddenField.setAttribute("value", btns[i].innerHTML);
         form.appendChild(hiddenField);
     }
     document.body.appendChild(form);

@@ -1,4 +1,4 @@
-package voidblue.preference.demo;
+package voidblue.preference.demo.Utils;
 
 import java.sql.*;
 
