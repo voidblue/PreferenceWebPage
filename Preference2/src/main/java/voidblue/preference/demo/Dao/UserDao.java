@@ -1,7 +1,6 @@
 package voidblue.preference.demo.Dao;
 
 import lombok.Cleanup;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.sql.*;
@@ -14,7 +13,6 @@ public class UserDao {
         Connection connection = DriverManager.getConnection("jdbc:mysql://220.149.42.125:3306/preference?characterEncoding=utf-8","root","456111");
         return connection;
     }
-
     public User getUser(String userId) throws SQLException, ClassNotFoundException {
         HashMap hashMap = new HashMap();
         @Cleanup

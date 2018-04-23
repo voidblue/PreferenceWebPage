@@ -118,8 +118,7 @@ public class Recommender {
 
     private String excuteRecomender() throws IOException {
         String path = System.getProperty("user.dir");
-        path += "/out/production/classes/voidblue/preference/demo";
-//        path += "/out/production/Preference";
+        path += "/src/main/java/voidblue/preference/demo";
         Process p = null;
         try{
             p = Runtime.getRuntime().exec(path + "/build/exe.linux-x86_64-3.5/recommend");
