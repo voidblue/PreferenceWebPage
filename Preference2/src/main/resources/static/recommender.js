@@ -45,9 +45,9 @@ function doPost(selectedNum) {
         hiddenField = document.createElement("input");
         hiddenField.setAttribute("type", "hidden");
         if (i > selectedNum) {
-            hiddenField.setAttribute("name", "other" + (i-1);
-        }else{
             hiddenField.setAttribute("name", "other" + i);
+        }else{
+            hiddenField.setAttribute("name", "other" + (i+1));
         }
         hiddenField.setAttribute("value", btns[i].innerHTML);
         form.appendChild(hiddenField);
