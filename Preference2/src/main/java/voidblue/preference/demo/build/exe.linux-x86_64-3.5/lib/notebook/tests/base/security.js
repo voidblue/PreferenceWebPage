@@ -19,7 +19,7 @@ unsafe_tests = [
     '<IFRAME SRC=# onmouseover="alert(document.cookie)"></IFRAME>',
     '<EMBED SRC="data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dH A6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv MjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hs aW5rIiB2ZXJzaW9uPSIxLjAiIHg9IjAiIHk9IjAiIHdpZHRoPSIxOTQiIGhlaWdodD0iMjAw IiBpZD0ieHNzIj48c2NyaXB0IHR5cGU9InRleHQvZWNtYXNjcmlwdCI+YWxlcnQoIlh TUyIpOzwvc2NyaXB0Pjwvc3ZnPg==" type="image/svg+xml" AllowScriptAccess="always"></EMBED>',
     // CSS is scrubbed
-    '<style src="http://untrusted/style.css"></style>',
+    '<style src="http://untrusted/poll.css"></style>',
     '<style>div#notebook { background-color: alert-red; }</style>',
     '<div style="background-color: alert-red;"></div>',
 ];
