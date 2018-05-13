@@ -238,7 +238,7 @@ define([
             that.notebook.session.delete(close_window, close_window);
         });
 
-        // View
+        // Controllers
         this._add_celltoolbar_list();
 
         // Edit

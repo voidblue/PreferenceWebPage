@@ -112,7 +112,7 @@ define([
             });
         });
         
-        // View
+        // Controllers
 
         this.element.find('#toggle_header').click(function (){
             $("#header-container").toggle();

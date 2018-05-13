@@ -642,7 +642,7 @@ define([
             $('.delete-button').css('display', 'none');
         }
 
-        // View is visible in the following case:
+        // Controllers is visible in the following case:
         //
         //   - the item is editable
         //   - it is not a notebook

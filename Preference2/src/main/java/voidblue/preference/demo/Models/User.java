@@ -1,10 +1,7 @@
-package voidblue.preference.demo.Dao;
+package voidblue.preference.demo.Models;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 @Setter
 public class User {
