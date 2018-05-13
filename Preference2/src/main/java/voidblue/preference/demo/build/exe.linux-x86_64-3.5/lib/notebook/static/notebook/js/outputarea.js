@@ -843,7 +843,7 @@ define([
         var toinsert = this.create_output_subarea(md, "output_pdf", type);
         var a = $('<a/>').attr('href', 'data:application/pdf;base64,'+pdf);
         a.attr('target', '_blank');
-        a.text('View PDF');
+        a.text('Controllers PDF');
         toinsert.append(a);
         element.append(toinsert);
         return toinsert;

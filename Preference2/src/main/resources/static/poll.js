@@ -10,7 +10,6 @@ if(( keyID >=48 && keyID <= 57 ) || ( keyID >=96 && keyID <= 105 ) || ( keyID >=
           // document.getElementById("keyinfo").innerHTML = keyID + " = 숫자만 입력해주세요";
           return false;
         }
-
 }
 
 var primeReason = document.getElementById("primeReason");
