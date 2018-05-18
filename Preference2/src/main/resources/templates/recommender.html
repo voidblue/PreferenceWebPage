@@ -7,7 +7,11 @@
     <link type="text/css" th:href="@{box.css}" rel="stylesheet" />
 </head>
 <body>
-<div th:each="sightSeeingSpots: ${sightSeeingSpots}" class="button" th:id="${sightSeeingSpots.rank}" th:text="${sightSeeingSpots.name}"></div>
+<form charset = "UTF-8" id = "form" method="post" action="result">
+<div th:each="sightSeeingSpots: ${sightSeeingSpots}" class="button" th:id="${sightSeeingSpots.rank}" th:text="${sightSeeingSpots.name}">
+</div>
+    <input type="hidden" name="id" id="userid" th:value="${id}" style="display:none"/>
+</form>
 <script th:src = "@{recommender.js}"></script>
 </body>
 </html>

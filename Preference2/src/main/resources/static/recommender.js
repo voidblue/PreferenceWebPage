@@ -25,11 +25,7 @@ btn5.onclick = function (ev) {
 
 function doPost(selectedNum) {
     btns = [btn1, btn2, btn3, btn4, btn5];
-    var form = document.createElement("form");
-    form.setAttribute("charset", "UTF-8");
-    form.setAttribute("method", "Post"); // Get 또는 Post 입력
-    form.setAttribute("action", "result");
-
+    var form = document.getElementById("form");
     var hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("name", "selected");
@@ -55,4 +51,4 @@ function doPost(selectedNum) {
     document.body.appendChild(form);
     form.submit();
 
-}
+};
