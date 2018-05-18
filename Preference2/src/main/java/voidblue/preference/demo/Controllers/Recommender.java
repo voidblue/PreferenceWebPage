@@ -15,16 +15,12 @@ import java.util.ArrayList;
 public class Recommender {
     @Autowired
     RecommendService recommendService;
-
-
-
-
     @PostMapping("/recommender")
     public String recommend(Model model, @ModelAttribute PollData pollData){
         ArrayList<SightSeeingSpot> sightSeeingSpots = recommendService.getSightSeeingSpots(pollData);
 
         model.addAttribute("sightSeeingSpots",sightSeeingSpots);
-
+        model.addAttribute("id", pollData.getId());
         return "recommender";
     }
 
