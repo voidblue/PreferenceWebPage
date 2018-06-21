@@ -4,6 +4,7 @@ import lombok.Cleanup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import voidblue.preference.demo.Models.*;
+import voidblue.preference.demo.Utils.Filler;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -40,6 +41,10 @@ public class RecommendService  {
     }
 
     private void saveInputForPythonTensorFlow(PollData pollData) {
+        User user = userDao.getUser(pollData.getId());
+        Filler filler = new Filler();
+        pollData = filler.fillPollData(user, pollData);
+
         String residence = "1";
 
         int currentMonth = Calendar.MONTH;
@@ -88,7 +93,6 @@ public class RecommendService  {
         String codeAccomodation = AccomodationBuilder.toString();
 
 
-        User user = userDao.getUser(pollData.getId());
 
         String dataForInput = pollData.getVisitTime() + " " + pollData.getStayDuration() + " " + pollData.getPrimeReason()
                 + " " + pollData.getConsiderReason1() + " " + pollData.getConsiderReason2() + " " +

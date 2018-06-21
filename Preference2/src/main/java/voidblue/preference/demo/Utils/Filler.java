@@ -1,27 +1,39 @@
 package voidblue.preference.demo.Utils;
 
-import javax.servlet.http.HttpServletRequest;
+import voidblue.preference.demo.Models.PollData;
+import voidblue.preference.demo.Models.User;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class Filler {
-    private HttpServletRequest req;
+    private User user;
+    private PollData pollData;
 
-    public Filler(HttpServletRequest req)
-    {
-        this.req = req;
+    public PollData fillPollData(User user, PollData pollData) {
+        this.user = user;
+        this.pollData = pollData;
+
+        pollData.setNumOfCompanion(fillNumOfCompanion());
+        pollData.setCompanion(fillTypeOfCompanion());
+        pollData.setInfoGet(fillHowGetInfo());
+        pollData.setStayDuration(fillStayDuration());
+        pollData.setVisitTime(fillVisitTime());
+        pollData.setTransportation(fillTransportation());
+        pollData.setConsiderReason1(fillReason1());
+        pollData.setConsiderReason2(fillReason2());
+        pollData.setPrimeReason(fillPrimeReason());
+        pollData.setTripType(fillTripType());
+        pollData.setAccomodation(fillAccomodation());
+
+        return this.pollData;
     }
-
-//    public static Filler getInstance(HttpServletRequest req)
-//    {
-//        return new Filler(req);
-//    }
 
     private boolean isEmpty(String str) {
         boolean isEmpty = false;
 
-        if (str.equals("guide") || str == null) { isEmpty = true; }
+        if (str.equals("null") || str == null) { isEmpty = true; }
 
         return isEmpty;
     }
@@ -46,17 +58,14 @@ public class Filler {
         return result;
     }
 
-    public String fillNumOfCompanion()
+    private String fillNumOfCompanion()
     {
-        String numOfCompanion = req.getParameter("numOfCompanion");
+        String numOfCompanion = pollData.getCompanion();
 
         if (isEmpty(numOfCompanion))
         {
-            // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함
-//            String age = req.getParameter("연령");
-//            String job = req.getParameter("직업");
-            String age = yearToAge("1994");
-            String job = "1";
+            String age = yearToAge(user.getBirth());
+            String job = user.getJob();
             if (age.equals("30대") && job.equals("12")) { numOfCompanion = "3"; }
             else if (age.equals("40대")) { numOfCompanion = "3"; }
             else { numOfCompanion = "2"; }
@@ -65,19 +74,15 @@ public class Filler {
         return numOfCompanion;
     }
 
-    public String fillTypeOfCompanion()
+    private String fillTypeOfCompanion()
     {
-        String typeOfCompanion = req.getParameter("companion");
+        String typeOfCompanion = pollData.getCompanion();
 
         if (isEmpty(typeOfCompanion))
         {
-            // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함
-//            String age = req.getParameter("연령");
-//            String education = req.getParameter("학력");
-////            String job = req.getParameter("직업");
-            String education = "1";
-            String age = yearToAge("1994");
-            String job = "1";
+            String education = user.getEducation();
+            String age = yearToAge(user.getBirth());
+            String job = user.getJob();
 
             if (age.equals("10대") && education.equals("2")) { typeOfCompanion = "5"; }
             else if (age.equals("20대")) {
@@ -91,15 +96,13 @@ public class Filler {
         return typeOfCompanion;
     }
 
-    public String fillHowGetInfo()
+    private String fillHowGetInfo()
     {
-        String howGetInfo = req.getParameter("infoGet");
+        String howGetInfo = pollData.getInfoGet();
 
         if (isEmpty(howGetInfo))
         {
-            // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함
-//            String age = req.getParameter("연령");
-            String age = yearToAge("1994");
+            String age = yearToAge(user.getBirth());
 
             if (age.equals("60대") || age.equals("70대")) { howGetInfo = "2"; }
             else { howGetInfo = "3"; }
@@ -108,9 +111,9 @@ public class Filler {
         return howGetInfo;
     }
 
-    public String fillStayDuration()
+    private String fillStayDuration()
     {
-        String stayDuration = req.getParameter("stayDuration");
+        String stayDuration = pollData.getStayDuration();
 
         if (isEmpty(stayDuration))
         {
@@ -123,17 +126,14 @@ public class Filler {
         return stayDuration;
     }
 
-    public String fillVisitTime()
+    private String fillVisitTime()
     {
-        String visitTime = req.getParameter("visitTime");
+        String visitTime = pollData.getVisitTime();
 
         if (isEmpty(visitTime))
         {
-            // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함
-//            String age = req.getParameter("연령");
-//            String education = req.getParameter("학력");
-            String age = yearToAge("1994");
-            String education = "1";
+            String age = yearToAge(user.getBirth());
+            String education = user.getEducation();
             int currentMonth = Calendar.MONTH;
 
             if (age.equals("30대")) {
@@ -145,28 +145,9 @@ public class Filler {
         return visitTime;
     }
 
-//    public String fillMinorPresence()
-//    {
-//        // TODO : 파라미터 이름 확인 및 수정 필요
-//        String minorPresence = req.getParameter("만15세미만동반유무");
-//
-//        if (isEmpty(minorPresence))
-//        {
-//            String typeOfCompanion = fillTypeOfCompanion();
-////            String age = req.getParameter("연령");
-//            String age = yearToAge("1994");
-//
-//            if (typeOfCompanion.equals("3")) {
-//                if (age.equals("30대") || age.equals("40대") || age.equals("70대")) { minorPresence = "1";}
-//            } else { minorPresence = "0"; }
-//        }
-//
-//        return minorPresence;
-//    }
-
-    public String fillTransportation()
+    private String fillTransportation()
     {
-        String transportaion = req.getParameter("transportation");
+        String transportaion = pollData.getTransportation();
 
         if (isEmpty(transportaion)) {
             String numOfCompanion = fillNumOfCompanion();
@@ -179,9 +160,9 @@ public class Filler {
         return transportaion;
     }
 
-    public String fillReason1()
+    private String fillReason1()
     {
-        String reason1 = req.getParameter("considerReason1");
+        String reason1 = pollData.getConsiderReason1();
 
         if (isEmpty(reason1))
         {
@@ -201,9 +182,9 @@ public class Filler {
         return reason1;
     }
 
-    public String fillReason2()
+    private String fillReason2()
     {
-        String reason2 = req.getParameter("considerReason2");
+        String reason2 = pollData.getConsiderReason2();
 
         if (isEmpty(reason2))
         {
@@ -218,21 +199,21 @@ public class Filler {
         return reason2;
     }
 
-    public String fillMainDest()
+    private String fillPrimeReason()
     {
-        String mainDestination = req.getParameter("primeReason");
+        String primeReason = pollData.getPrimeReason();
 
-        if (isEmpty(mainDestination))
+        if (isEmpty(primeReason))
         {
-            mainDestination = fillReason1();
+            primeReason = fillReason1();
         }
 
-        return mainDestination;
+        return primeReason;
     }
 
-    public String fillTripType()
+    private String fillTripType()
     {
-        String typeOftrip = req.getParameter("tripType");
+        String typeOftrip = pollData.getTripType();
 
         if (isEmpty(typeOftrip)) {
             String transportation = fillTransportation();
@@ -247,18 +228,16 @@ public class Filler {
         return typeOftrip;
     }
 
-    public String fillAccomodation()
+    private String fillAccomodation()
     {
-        String accomodation = req.getParameter("accomodation");
+        String accomodation = pollData.getAccomodation();
 
         if (isEmpty(accomodation))
         {
-            // TODO: 큐텔에서 파라미터를 제공해 주는 대로 그에 맞춰 바꿔야 함
             String transportaion = fillTransportation();
             String typeOfCompanion = fillTypeOfCompanion();
             String stayDuration = fillStayDuration();
-//            String age = req.getParameter("연령");
-            String age = yearToAge("1994");
+            String age = yearToAge(user.getBirth());
 
 
             if (typeOfCompanion.equals("5") || typeOfCompanion.equals("1")) {
