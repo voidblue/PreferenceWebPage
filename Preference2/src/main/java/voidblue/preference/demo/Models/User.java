@@ -56,4 +56,22 @@ public class User {
         return result;
     }
 
+    public String getRegion(){
+        String result = null;
+        if(region.equals("서울시")) result="1";
+        else if(region.equals("경기도")) result="2";
+        else if(region.equals("전라도")) result="3";
+        else if(region.equals("부산시")) result="4";
+        else if(region.equals("경상도")) result="5";
+        else if(region.equals("울산시")) result="6";
+        else if(region.equals("충청도")) result="7";
+        else if(region.equals("대전시")) result="8";
+        else if(region.equals("인천시")) result="9";
+        else if(region.equals("광주시")) result="10";
+        else if(region.equals("대구시")) result="11";
+        else if(region.equals("강원도")) result="12";
+        else result = region;
+        return result;
+    }
+
 }

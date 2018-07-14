@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" th:href="@{box.css}" rel="stylesheet" />
+</head>
+<body>
+<form charset = "UTF-8" id = "form" method="post" action="result">
+<div th:each="sightSeeingSpots: ${sightSeeingSpots}" class="button" th:id="${sightSeeingSpots.rank}" th:text="${sightSeeingSpots.name}">
+</div>
+    <input type="hidden" name="id" id="userid" th:value="${id}" style="display:none"/>
+</form>
+<script th:src = "@{recommender.js}"></script>
+</body>
+</html>

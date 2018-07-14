@@ -25,22 +25,9 @@ public class UserDao {
             user.setBirth(rs.getString("BIRTH"));
             user.setEducation(rs.getString("EDUCATION"));
             user.setJob(rs.getString("JOB"));
+            user.setRegion(rs.getString("REGION"));
             return user;
         }));
 
     }
-
-    public void insertUSer(User user){
-
-        String sql = "insert into USERS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        Object[] params = {user.getId(), "1", "test", "1", user.getBirth(), user.getEducation(), user.getJob(), "", user.getRegion()};
-        try {
-            jdbcTemplate.update(sql, params);
-        }catch (DuplicateKeyException e){
-
-        }
-    }
-
-
-
 }

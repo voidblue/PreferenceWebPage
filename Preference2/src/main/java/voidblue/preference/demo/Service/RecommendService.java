@@ -9,7 +9,6 @@ import voidblue.preference.demo.Utils.Filler;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
-
 @Service
 public class RecommendService  {
     @Autowired
@@ -18,54 +17,31 @@ public class RecommendService  {
     InputDao inputDao;
 
     public ArrayList<SightSeeingSpot> getSightSeeingSpots(PollData pollData) {
-        saveInputForPythonTensorFlow(pollData);
+        String argv = getArgvsForPythonTensorflow(pollData);
         String[] result = new String[0];
         try {
-            result = excutePythonRecomender();
+            result = excutePythonRecomender(argv);
         } catch (IOException e) {
             e.printStackTrace();
         }
         ArrayList<SightSeeingSpot> sightSeeingSpots = new ArrayList();
-        int index = 0;
         for (int i = 1; i < result.length ; i++){
-            if (i % 2 == 1) {
-                SightSeeingSpot sightSeeingSpot = new SightSeeingSpot();
-                sightSeeingSpot.setName(result[i]);
-                sightSeeingSpot.setRank(index);
-                index++;
-                sightSeeingSpots.add(sightSeeingSpot);
-            }
+            SightSeeingSpot sightSeeingSpot = new SightSeeingSpot();
+            sightSeeingSpot.setName(result[i]);
+            sightSeeingSpot.setRank(i);
+            sightSeeingSpots.add(sightSeeingSpot);
 
         }
+        System.out.println(sightSeeingSpots.get(0).toString());
         return sightSeeingSpots;
     }
 
-    private void saveInputForPythonTensorFlow(PollData pollData) {
+    private String getArgvsForPythonTensorflow(PollData pollData) {
         User user = userDao.getUser(pollData.getId());
         Filler filler = new Filler();
         pollData = filler.fillPollData(user, pollData);
 
-        String residence = "1";
-
         String currentMonth = Integer.toString(Calendar.MONTH);
-
-        Input input = new Input();
-        input.setVisitTime(pollData.getVisitTime());
-        input.setStayDuration(pollData.getStayDuration());
-        input.setMainDestination(pollData.getPrimeReason());
-        input.setConsiderReason1(pollData.getConsiderReason1());
-        input.setConsiderReason2(pollData.getConsiderReason2());
-        input.setHowGetInfomation(pollData.getInfoGet());
-        input.setTypeOfCompanion(pollData.getCompanion());
-        input.setNumOfPeople(pollData.getNumOfCompanion());
-        input.setNumOfMinor("0");
-        input.setAccomodation(pollData.getAccomodation());
-        input.setTransportaion(pollData.getTransportation());
-        input.setTripType(pollData.getTripType());
-        input.setMonth(currentMonth);
-        input.setUserId(pollData.getId());
-        inputDao.tryInsertThenUpdate(input);
-
 
 
         int iTypeOfCompanion = Integer.parseInt(pollData.getCompanion());
@@ -98,43 +74,30 @@ public class RecommendService  {
         String dataForInput = pollData.getVisitTime() + " " + pollData.getStayDuration() + " " + pollData.getPrimeReason()
                 + " " + pollData.getConsiderReason1() + " " + pollData.getConsiderReason2() + " " +
                 pollData.getInfoGet() + " " + codeTypeOfCompanion + " " + pollData.getNumOfCompanion() + " "+ "0 " +
-                codeAccomodation + " " + pollData.getTransportation() + " " + pollData.getTripType() + " " + residence
+                codeAccomodation + " " + pollData.getTransportation() + " " + pollData.getTripType() + " " + user.getRegion()
                 + " " + user.getSex() + " " + user.getEducation() + " " +
                 user.getBirth() + " "  + user.getJob() + " " +  currentMonth;
 
-        dataForInput = "# \n" + dataForInput;
 
 
-        String path = System.getProperty("user.dir");
-        path += "/out/production/classes/voidblue/prefernce/demo";
-        path += "/build";
-
-
-        try {
-            @Cleanup
-            FileOutputStream fileOutputStream = new FileOutputStream(path + "/input");
-            @Cleanup
-            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
-            bufferedOutputStream.write(dataForInput.getBytes());
-            bufferedOutputStream.close();
-        } catch (IOException e) {
-        }
-
+        return dataForInput;
     }
 
 
-    private String[] excutePythonRecomender() throws IOException {
+    private String[] excutePythonRecomender(String argv) throws IOException {
         String path = System.getProperty("user.dir");
         path += "/src/main/java/voidblue/preference/demo";
         Process p = null;
         try{
-            p = Runtime.getRuntime().exec(path + "/build/exe.linux-x86_64-3.5/recommend");
+            p = Runtime.getRuntime().exec("python3 "+ path + "/Preference/PBRS.py -r "+ argv);
+            System.out.println("python3 "+ path + "/Preference/PBRS.py -r "+ argv);
             p.waitFor();
         } catch (IOException ex){
             System.out.println(ex.getMessage());} catch (InterruptedException e) {
             e.printStackTrace();
         }
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
+
         @Cleanup
         BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
@@ -143,9 +106,9 @@ public class RecommendService  {
             sb.append(str);
         }
 
-
+        System.out.println(sb.toString());
         String[] result = sb.toString().split("ESC");
-
+        System.out.println(result.length);
         return result;
     }
 }

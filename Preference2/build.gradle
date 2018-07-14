@@ -23,6 +23,17 @@ repositories {
     mavenCentral()
 }
 
+//
+//
+//jar {
+//    manifest {
+//        attributes  'Title': 'My Application', 'Version': version, 'Main-Class': 'voidblue.preference.demo.DemoApplication'
+//    }
+//    from {
+//        configurations.compile.collect {it.isDirectory()? it: zipTree(it)}
+//    }
+//}
+
 
 dependencies {
 

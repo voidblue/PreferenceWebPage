@@ -1,17 +1,33 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" th:href="@{box.css}" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <title>제주 추천관광</title>
+    <link th:href="@{style2.css}" rel="stylesheet">
+    <script>
+    function myFunction() {
+        var element = document.getElementById("panel");
+        element.classList.toggle("show");
+    }
+    </script>
 </head>
 <body>
-<form charset = "UTF-8" id = "form" method="post" action="result">
-<div th:each="sightSeeingSpots: ${sightSeeingSpots}" class="button" th:id="${sightSeeingSpots.rank}" th:text="${sightSeeingSpots.name}">
+<div class="recommend-wrap">
+    <form action="/result" id="form" method="post">
+    <h1>추천 관광정보</h1>
+
+    <ul>
+        <li th:each="sightSeeingSpot : ${sightSeeingSpots}" class="button" th:id="${sightSeeingSpot.rank}">
+            <a href="#" onclick="return false" th:text="0${sightSeeingSpot.rank}+. +${sightSeeingSpot.name}"></a>
+        </li>
+        <input type="hidden" name="id" id="userid" th:value="${id}" style="display:none"/>
+    </ul>
+    </form>
+</div>   
+<a href="http://www.visitjeju.net/ko/index.jto" class="vj-link"><span>VISIT JEJU 바로가기</span></a>
+<div id="panel" onclick="myFunction()">
+    <p>추천관광정보 받는 법: 설문작성-> 설문완료 후 QR코드를 리더기에 인식-> 나에게 맞는 추천관광지 확인</p>
 </div>
-    <input type="hidden" name="id" id="userid" th:value="${id}" style="display:none"/>
-</form>
-<script th:src = "@{recommender.js}"></script>
+<script th:src="@{recommender.js}"></script>
 </body>
 </html>

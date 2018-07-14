@@ -21,19 +21,20 @@ public class Result extends HttpServlet {
 
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
-
+        String prefixSpliter = "\\) ";
+        String postfixSpliter = "<\\/a>\\r\\n";
         try {
-            jsonObject.put("selected", selected);
-            jsonObject.put("other1", other1);
-            jsonObject.put("other2", other2);
-            jsonObject.put("other3", other3);
-            jsonObject.put("other4", other4);
+            jsonObject.put("selected", selected.split(prefixSpliter)[1].split(postfixSpliter)[0]);
+            jsonObject.put("other1", other1.split(prefixSpliter)[1].split(postfixSpliter)[0]);
+            jsonObject.put("other2", other2.split(prefixSpliter)[1].split(postfixSpliter)[0]);
+            jsonObject.put("other3", other3.split(prefixSpliter)[1].split(postfixSpliter)[0]);
+            jsonObject.put("other4", other4.split(prefixSpliter)[1].split(postfixSpliter)[0]);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
-        resultService.tryInsertThenUpdate(selected, userId);
+        resultService.tryInsertThenUpdate(selected.split(prefixSpliter)[1].split(postfixSpliter)[0], userId);
         jsonArray.put(jsonObject);
         return jsonArray.toString();
 
