@@ -96,6 +96,8 @@ public class RecommendService  {
             System.out.println(ex.getMessage());} catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        @Cleanup
         StringBuilder sb = new StringBuilder();
 
         @Cleanup
