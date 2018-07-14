@@ -1,11 +1,9 @@
 package voidblue.preference.demo.Models;
 
 import lombok.Data;
-import lombok.ToString;
 
 @Data
-@ToString
-public class Output {
+public class TrainingOutput {
     private int 한라산;
     private int 오름;
     private int 성산일출봉;
@@ -62,6 +60,4 @@ public class Output {
     private int 제주바다체험장;
     private int 골프장;
     private int 카지노;
-    private String userID;
-
 }

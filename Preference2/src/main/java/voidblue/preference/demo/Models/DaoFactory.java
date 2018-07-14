@@ -38,13 +38,13 @@ public class DaoFactory {
     public DataSource dataSource(){
         DataSource dataSource = new SimpleDriverDataSource();
         try {
-            ((SimpleDriverDataSource) dataSource).setDriverClass((Class<? extends Driver>) Class.forName(classname));
+            ((SimpleDriverDataSource) dataSource).setDriverClass((Class<? extends Driver>) Class.forName("com.mysql.jdbc.Driver"));
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        ((SimpleDriverDataSource) dataSource).setUsername(username);
-        ((SimpleDriverDataSource) dataSource).setPassword(password);
-        ((SimpleDriverDataSource) dataSource).setUrl(url);
+        ((SimpleDriverDataSource) dataSource).setUsername("root");
+        ((SimpleDriverDataSource) dataSource).setPassword("456111");
+        ((SimpleDriverDataSource) dataSource).setUrl("jdbc:mysql://220.149.42.125/preference?characterEncoding=utf-8");
         return dataSource;
     }
 
@@ -58,4 +58,11 @@ public class DaoFactory {
     public RecommendService recommendService(){
         return new RecommendService();
     }
+
+//TODO 지워야할것
+    @Bean
+    public TrainingData trainingData(){
+        return new TrainingData(jdbcTemplate());
+    }
+
 }
