@@ -47,7 +47,7 @@ public class RecommendService  {
 
         String residence = "1";
 
-        int currentMonth = Calendar.MONTH;
+        String currentMonth = Integer.toString(Calendar.MONTH);
 
         Input input = new Input();
         input.setVisitTime(pollData.getVisitTime());
@@ -62,6 +62,7 @@ public class RecommendService  {
         input.setAccomodation(pollData.getAccomodation());
         input.setTransportaion(pollData.getTransportation());
         input.setTripType(pollData.getTripType());
+        input.setMonth(currentMonth);
         input.setUserId(pollData.getId());
         inputDao.tryInsertThenUpdate(input);
 

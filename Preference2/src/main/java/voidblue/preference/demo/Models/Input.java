@@ -17,5 +17,6 @@ public class Input {
     private String accomodation;
     private String transportaion;
     private String tripType;
+    private String month;
 	private String userId;
 }

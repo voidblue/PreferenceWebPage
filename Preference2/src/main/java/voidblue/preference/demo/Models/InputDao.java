@@ -81,21 +81,21 @@ public class InputDao {
         String insertQuery = "INSERT INTO INPUTS(VISIT_TIME, STAY_DURATION, MAIN_DESTINATION, CONSIDER_REASON1, CONSIDER_REASON2," +
                 "HOW_GET_INFORMATION, ISALONE, ISCOUPLE, ISFAMILY, ISCOLLEGUE, ISFRIEND, ISAMITY, ETC_COMPANION," +
                 "NUM_OF_PEOPLE, MONOR, ISHOTEL, ISMOTEL, ISGUESTHOUSE, ISPENSION, ISRESORT, ISFRIENDS_HOUSE," +
-                "NO_ACCOMODATION, ETC_ACCOMODATION, TRANSPORTATION, TRIP_TYPE, USER_ID)" +
-                "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "NO_ACCOMODATION, ETC_ACCOMODATION, TRANSPORTATION, TRIP_TYPE, MONTH, USER_ID)" +
+                "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         String UpdateQuery = "UPDATE INPUTS SET VISIT_TIME = ?, STAY_DURATION = ?, MAIN_DESTINATION = ?," +
                 "CONSIDER_REASON1 = ?, CONSIDER_REASON2 = ?, HOW_GET_INFORMATION = ?, ISALONE = ?," +
                 "ISCOUPLE = ?, ISFAMILY = ?,  ISCOLLEGUE = ?, ISFRIEND = ?, ISAMITY = ? , ETC_COMPANION = ?," +
                 "NUM_OF_PEOPLE = ?, MONOR = ?, ISHOTEL = ?, ISMOTEL = ?, ISGUESTHOUSE = ?, ISPENSION = ?,   " +
                 "ISRESORT = ?, ISFRIENDS_HOUSE = ?, NO_ACCOMODATION = ?, ETC_ACCOMODATION = ?, TRANSPORTATION = ?," +
-                "TRIP_TYPE = ? WHERE USER_ID = ?";
+                "TRIP_TYPE = ?, MONTH = ? WHERE USER_ID = ?";
         Object[] params = {input.getVisitTime(), input.getStayDuration(), input.getMainDestination(),
                         input.getConsiderReason1(), input.getConsiderReason2(),
                         input.getHowGetInfomation(),isAlone, isCouple, isFamily, isCollgue, isFriend,
                         isAmity, etcCompanion, input.getNumOfPeople(), input.getNumOfMinor(), isHotel,
                         isMotel, isGuestHouse,isPension, isResort, isFriendsHouse, noAccomodation, etcAccomodation,
-                        input.getTransportaion(), input.getTripType(), input.getUserId()};
+                        input.getTransportaion(), input.getTripType(), input.getMonth(), input.getUserId()};
         try{
             jdbcTemplate.update(insertQuery, params);
         }catch (DuplicateKeyException e){
