@@ -18,7 +18,7 @@
 
     <ul>
         <li th:each="sightSeeingSpot : ${sightSeeingSpots}" class="button" th:id="${sightSeeingSpot.rank}">
-            <a href="#" onclick="return false" th:text="0${sightSeeingSpot.rank}+. +${sightSeeingSpot.name}"></a>
+            <a href="#" onclick="return false" th:text="0+${sightSeeingSpot.rank}+. +${sightSeeingSpot.name}"></a>
         </li>
         <input type="hidden" name="id" id="userid" th:value="${id}" style="display:none"/>
     </ul>

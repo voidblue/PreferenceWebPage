@@ -69,8 +69,8 @@ public class RecommendService  {
         }
         String codeAccomodation = AccomodationBuilder.toString();
 
-
-
+//        1 1 2 3 0 0 1 0 0 0 0  2 0 1 0 0 0 0 0 0 0  1 1 1 2 2 2018 8 2
+//        1 2 1 3 4 2 0 1 0 0 0 0 0  2 0 0 0 0 1 0 0 0 0  2 1 1 2 2 2018 8 2
         String dataForInput = pollData.getVisitTime() + " " + pollData.getStayDuration() + " " + pollData.getPrimeReason()
                 + " " + pollData.getConsiderReason1() + " " + pollData.getConsiderReason2() + " " +
                 pollData.getInfoGet() + " " + codeTypeOfCompanion + " " + pollData.getNumOfCompanion() + " "+ "0 " +
@@ -97,7 +97,6 @@ public class RecommendService  {
             e.printStackTrace();
         }
 
-        @Cleanup
         StringBuilder sb = new StringBuilder();
 
         @Cleanup

@@ -1,5 +1,6 @@
 package voidblue.preference.demo.Utils;
 
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import voidblue.preference.demo.Models.PollData;
 import voidblue.preference.demo.Models.User;
 
@@ -10,11 +11,13 @@ import java.util.Locale;
 public class Filler {
     private User user;
     private PollData pollData;
+    private Calendar calendar;
+    private int rangeOfRange;
 
     public PollData fillPollData(User user, PollData pollData) {
         this.user = user;
         this.pollData = pollData;
-
+        calendar = Calendar.getInstance();
         pollData.setNumOfCompanion(fillNumOfCompanion());
         pollData.setCompanion(fillTypeOfCompanion());
         pollData.setInfoGet(fillHowGetInfo());
@@ -27,36 +30,19 @@ public class Filler {
         pollData.setTripType(fillTripType());
         pollData.setAccomodation(fillAccomodation());
 
+        rangeOfRange = getRangeOfAge();
         return this.pollData;
     }
 
     private boolean isEmpty(String str) {
         boolean isEmpty = false;
 
-        if (str.equals("null") || str == null) { isEmpty = true; }
+        if (str.equals("null") || str.equals("")) { isEmpty = true; }
 
         return isEmpty;
     }
 
-    private String yearToAge(String year)
-    {
-        Calendar calendar = new GregorianCalendar(Locale.KOREA);
 
-        int birthYear = Integer.parseInt(year);
-        int currentYear = calendar.get(Calendar.YEAR);
-        int age = currentYear - birthYear + 1;
-        String result = null;
-
-        if (age >= 0 && age < 20) { result = "10대"; }
-        else if (age >= 20 && age < 30) { result = "20대"; }
-        else if (age >= 30 && age < 40) { result = "30대"; }
-        else if (age >= 40 && age < 50) { result = "40대"; }
-        else if (age >= 50 && age < 60) { result = "50대"; }
-        else if (age >= 60 && age < 70) { result = "60대"; }
-        else if (age >= 70) { result = "70대"; }
-
-        return result;
-    }
 
     private String fillNumOfCompanion()
     {
@@ -64,13 +50,12 @@ public class Filler {
 
         if (isEmpty(numOfCompanion))
         {
-            String age = yearToAge(user.getBirth());
             String job = user.getJob();
-            if (age.equals("30대") && job.equals("12")) { numOfCompanion = "3"; }
-            else if (age.equals("40대")) { numOfCompanion = "3"; }
+            if (this.rangeOfRange == 3 && job.equals("12")) { numOfCompanion = "3"; }
+            else if (this.rangeOfRange == 4) { numOfCompanion = "3"; }
             else { numOfCompanion = "2"; }
         }
-
+//        System.out.println("동료수" +  numOfCompanion);
         return numOfCompanion;
     }
 
@@ -81,11 +66,10 @@ public class Filler {
         if (isEmpty(typeOfCompanion))
         {
             String education = user.getEducation();
-            String age = yearToAge(user.getBirth());
             String job = user.getJob();
 
-            if (age.equals("10대") && education.equals("2")) { typeOfCompanion = "5"; }
-            else if (age.equals("20대")) {
+            if (this.rangeOfRange == 1 && education.equals("2")) { typeOfCompanion = "5"; }
+            else if (this.rangeOfRange == 2) {
                 if (job.equals("11") || job.equals("5") || job.equals("8")
                         || job.equals("13") || job.equals("4")) {
                     typeOfCompanion = "5";
@@ -93,6 +77,7 @@ public class Filler {
             } else { typeOfCompanion = "3"; }
         }
 
+//        System.out.println("동료타입" +  typeOfCompanion);
         return typeOfCompanion;
     }
 
@@ -102,12 +87,12 @@ public class Filler {
 
         if (isEmpty(howGetInfo))
         {
-            String age = yearToAge(user.getBirth());
 
-            if (age.equals("60대") || age.equals("70대")) { howGetInfo = "2"; }
+            if (this.rangeOfRange == 6 || this.rangeOfRange == 7) { howGetInfo = "2"; }
             else { howGetInfo = "3"; }
         }
 
+//        System.out.println("정보" +  howGetInfo);
         return howGetInfo;
     }
 
@@ -117,12 +102,12 @@ public class Filler {
 
         if (isEmpty(stayDuration))
         {
-            int currentMonth = Calendar.MONTH;
+            int currentMonth = calendar.get(Calendar.MONTH);
 
             if(currentMonth == 7 || currentMonth == 8) { stayDuration = "4"; }
             else { stayDuration = "3"; }
         }
-
+//        System.out.println("방문기간" +  stayDuration);
         return stayDuration;
     }
 
@@ -132,16 +117,15 @@ public class Filler {
 
         if (isEmpty(visitTime))
         {
-            String age = yearToAge(user.getBirth());
             String education = user.getEducation();
-            int currentMonth = Calendar.MONTH;
+            int currentMonth = calendar.get(Calendar.MONTH);
 
-            if (age.equals("30대")) {
+            if (this.rangeOfRange == 3) {
                 if (currentMonth == 1 || currentMonth == 2) { visitTime = "1"; }
             } else if (education.equals("2") || education.equals("1")) { visitTime = "1"; }
             else { visitTime = "2"; }
         }
-
+//        System.out.println("방문횟수" +  visitTime);
         return visitTime;
     }
 
@@ -154,9 +138,9 @@ public class Filler {
 
             if (numOfCompanion.equals("1")) { transportaion = "3"; }
             else if (numOfCompanion.equals("10")) { transportaion = "4"; }
-            else { numOfCompanion = "1"; }
+            else { transportaion = "1"; }
         }
-
+//        System.out.println("교통수단" + transportaion);
         return transportaion;
     }
 
@@ -179,6 +163,7 @@ public class Filler {
             } else { reason1 = "1"; }
         }
 
+//        System.out.println("이유1" + reason1);
         return reason1;
     }
 
@@ -196,6 +181,7 @@ public class Filler {
             else { reason2 = "4"; }
         }
 
+//        System.out.println("이유2" + reason2);
         return reason2;
     }
 
@@ -208,6 +194,7 @@ public class Filler {
             primeReason = fillReason1();
         }
 
+//        System.out.println("주목적" + primeReason);
         return primeReason;
     }
 
@@ -225,6 +212,7 @@ public class Filler {
             } else { typeOftrip = "1"; }
         }
 
+//        System.out.println("여행타입" + typeOftrip);
         return typeOftrip;
     }
 
@@ -237,12 +225,11 @@ public class Filler {
             String transportaion = fillTransportation();
             String typeOfCompanion = fillTypeOfCompanion();
             String stayDuration = fillStayDuration();
-            String age = yearToAge(user.getBirth());
 
 
             if (typeOfCompanion.equals("5") || typeOfCompanion.equals("1")) {
-                if (age.equals("20대") && stayDuration.equals("4")) { accomodation = "3"; }
-                else if (age.equals("10대") || age.equals("30대")) {
+                if (this.rangeOfRange == 2 && stayDuration.equals("4")) { accomodation = "3"; }
+                else if (this.rangeOfRange == 2 || this.rangeOfRange == 3) {
                     if (transportaion.equals("3") || transportaion.equals("6")
                             || transportaion.equals("5")) {
                         accomodation = "3";
@@ -251,6 +238,24 @@ public class Filler {
             } else { accomodation = "1"; }
         }
 
+//        System.out.println("숙박" + accomodation);
         return accomodation;
+    }
+
+    private int getRangeOfAge(){
+        int birthYear = Integer.parseInt(user.getBirth());
+        int thisYear;
+        thisYear = calendar.get(Calendar.YEAR);
+        int rangeOFYear;
+        if(thisYear - birthYear < 10) rangeOFYear = 0;
+        else if(thisYear - birthYear < 20) rangeOFYear = 1;
+        else if(thisYear - birthYear < 30) rangeOFYear = 2;
+        else if(thisYear - birthYear < 40) rangeOFYear = 3;
+        else if(thisYear - birthYear < 50) rangeOFYear = 4;
+        else if(thisYear - birthYear < 60) rangeOFYear = 5;
+        else if(thisYear - birthYear < 70) rangeOFYear = 6;
+        else rangeOFYear = 7;
+
+        return rangeOFYear;
     }
 }
