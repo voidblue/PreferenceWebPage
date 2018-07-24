@@ -17,17 +17,24 @@
     <h1>추천 관광정보</h1>
 
     <ul>
-        <li th:each="sightSeeingSpot : ${sightSeeingSpots}" class="button" th:id="${sightSeeingSpot.rank}">
-            <a href="#" onclick="return false" th:text="0+${sightSeeingSpot.rank}+. +${sightSeeingSpot.name}"></a>
+        <li th:each="sightSeeingSpot : ${sightSeeingSpots}" class="button" >
+            <a href="#" onclick="return false" th:text="0+${sightSeeingSpot.rank}+'. '+${sightSeeingSpot.name}" class="name" th:id="'name'+${sightSeeingSpot.rank}"></a>
+            <a href="#" onclick="return false" th:text="'(' + ${sightSeeingSpot.category} +')'" th:id="'cat'+${sightSeeingSpot.rank}"></a>
+            <div th:id="'cat_list'+${sightSeeingSpot.rank}" style="display: none" ></div>
         </li>
-        <input type="hidden" name="id" id="userid" th:value="${id}" style="display:none"/>
+        <input type="hidden" name="id" id="userid" th:value="${id}" style="display:none" />
+
     </ul>
     </form>
+    <ul type="hidden" id = "xxx">
+        <li>sadsad</li>
+    </ul>
 </div>   
 <a href="http://www.visitjeju.net/ko/index.jto" class="vj-link"><span>VISIT JEJU 바로가기</span></a>
 <div id="panel" onclick="myFunction()">
     <p>추천관광정보 받는 법: 설문작성-> 설문완료 후 QR코드를 리더기에 인식-> 나에게 맞는 추천관광지 확인</p>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script th:src="@{recommender.js}"></script>
 </body>
 </html>

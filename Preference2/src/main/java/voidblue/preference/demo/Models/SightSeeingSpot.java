@@ -8,4 +8,5 @@ import lombok.ToString;
 public class SightSeeingSpot {
     String name;
     Integer rank;
+    String category;
 }

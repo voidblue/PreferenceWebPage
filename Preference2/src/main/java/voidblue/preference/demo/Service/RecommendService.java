@@ -27,8 +27,9 @@ public class RecommendService  {
         ArrayList<SightSeeingSpot> sightSeeingSpots = new ArrayList();
         for (int i = 1; i < result.length ; i++){
             SightSeeingSpot sightSeeingSpot = new SightSeeingSpot();
-            sightSeeingSpot.setName(result[i]);
+            sightSeeingSpot.setName(result[i].split("@@@")[0]);
             sightSeeingSpot.setRank(i);
+            sightSeeingSpot.setCategory(result[i].split("@@@")[1]);
             sightSeeingSpots.add(sightSeeingSpot);
 
         }
